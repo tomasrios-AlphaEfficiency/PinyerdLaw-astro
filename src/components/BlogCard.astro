@@ -1,0 +1,37 @@
+---
+import { Image, type ImageMetadata } from "astro:assets";
+
+interface Props {
+  image: ImageMetadata;
+  date: string;
+  category: string;
+  title: string;
+  excerpt: string;
+  href: string;
+}
+
+const { image, date, category, title, excerpt, href } = Astro.props;
+---
+
+<article class="flex flex-1 flex-col overflow-hidden rounded-xl border border-line bg-white shadow-[-6px_-6px_27.6px_0_rgba(111,145,200,0.15),0_25px_50px_-12px_rgba(0,0,0,0.15)]">
+  <div class="relative h-[220px] w-full">
+    <Image src={image} alt={title} class="h-full w-full object-cover" width={393} height={220} fit="cover" />
+  </div>
+
+  <div class="flex flex-col items-start gap-8 p-8">
+    <div class="flex items-start gap-3">
+      <span class="border-r border-[#4e5156] pr-3 font-sans text-base font-medium leading-none text-[#555]">
+        {date}
+      </span>
+      <span class="font-sans text-base font-medium leading-none text-navy-light">{category}</span>
+    </div>
+
+    <h3 class="font-serif text-[28px] leading-relaxed text-navy">{title}</h3>
+    <p class="font-sans text-base leading-relaxed text-ink">{excerpt}</p>
+
+    <a href={href} class="flex items-center gap-3">
+      <span class="font-sans text-base font-semibold text-navy">READ MORE</span>
+      <img src="/icons/icon-arrow-right-small.svg" alt="" class="h-4 w-2 rotate-180" aria-hidden="true" />
+    </a>
+  </div>
+</article>

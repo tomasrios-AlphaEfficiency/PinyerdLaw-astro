@@ -1,0 +1,37 @@
+---
+import { Image, type ImageMetadata } from "astro:assets";
+import SectionHeading from "../SectionHeading.astro";
+import Button from "../Button.astro";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  photo: ImageMetadata;
+  photoAlt: string;
+  storyEyebrow: string;
+  name: string;
+  bio: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+const { eyebrow, title, photo, photoAlt, storyEyebrow, name, bio, ctaLabel, ctaHref } = Astro.props;
+---
+
+<section class="flex flex-col items-center justify-center bg-surface px-6 py-16 lg:py-[100px]">
+  <div class="content flex flex-col gap-12 lg:gap-[70px]">
+    <SectionHeading eyebrow={eyebrow} title={title} />
+
+    <div class="flex flex-col items-center gap-10 lg:flex-row lg:justify-between">
+      <div class="relative h-[280px] w-[280px] shrink-0 overflow-hidden rounded-full shadow-[-6px_-6px_27.6px_0_rgba(111,145,200,0.15),0_25px_50px_0_rgba(0,0,0,0.15)] sm:h-[360px] sm:w-[360px] lg:h-[436px] lg:w-[436px]">
+        <Image src={photo} alt={photoAlt} class="h-full w-full object-cover" width={436} height={436} fit="cover" />
+      </div>
+
+      <div class="flex w-full flex-col items-start gap-8 lg:w-[703px]">
+        <SectionHeading eyebrow={storyEyebrow} title={name} />
+        <p class="font-sans text-base leading-relaxed text-ink">{bio}</p>
+        <Button href={ctaHref} variant="solid">{ctaLabel}</Button>
+      </div>
+    </div>
+  </div>
+</section>

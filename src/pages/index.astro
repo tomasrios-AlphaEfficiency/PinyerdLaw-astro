@@ -1,17 +1,265 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/sections/Hero.astro";
+import VideoIntro from "../components/sections/VideoIntro.astro";
+import PracticeAreas from "../components/sections/PracticeAreas.astro";
+import ApproachSection from "../components/sections/ApproachSection.astro";
+import Testimonials from "../components/sections/Testimonials.astro";
+import AttorneyBio from "../components/sections/AttorneyBio.astro";
+import FeatureBanner from "../components/sections/FeatureBanner.astro";
+import ContactForm from "../components/sections/ContactForm.astro";
+import BlogSection from "../components/sections/BlogSection.astro";
+import FAQSection from "../components/sections/FAQSection.astro";
 
+import heroBg from "../assets/images/hero-bg.png";
+import badgeLawyersOfDistinction from "../assets/images/badge-lawyers-of-distinction.png";
+import badge2 from "../assets/images/badge-2.png";
+import badgeFindLaw from "../assets/images/badge-findlaw.png";
+import badge4 from "../assets/images/badge-4.png";
+import badgeNosscr from "../assets/images/badge-nosscr.png";
+import badgeLawyer from "../assets/images/badge-lawyer.png";
+import badgeThreeBestRated from "../assets/images/hero-side-image.png";
+import videoThumb from "../assets/images/video-thumb.png";
+import videoLogo from "../assets/images/logo-white.png";
+import statue from "../assets/images/statue.png";
+import avatar1 from "../assets/images/avatar-1.png";
+import avatar2 from "../assets/images/avatar-2.png";
+import davidPhoto from "../assets/images/david-pinyerd.png";
+import featureBannerDark from "../assets/images/feature-banner-dark.png";
+import featureBannerLight from "../assets/images/feature-banner-light-2.png";
+import formBg from "../assets/images/form-bg.png";
+import blogPost1 from "../assets/images/blog-post-1-bg.png";
+import blogPost2 from "../assets/images/blog-post-2.png";
+import blogPost3 from "../assets/images/blog-post-3.png";
+
+const heroBadges = [
+  { src: "bbb", alt: "Better Business Bureau A+ accredited" },
+  { src: badgeLawyersOfDistinction, alt: "Lawyers of Distinction" },
+  { src: badge2, alt: "NOVA Top 5 Lawyers of Distinction" },
+  { src: badgeFindLaw, alt: "FindLaw Badge" },
+  { src: badge4, alt: "IndyBar Association" },
+  { src: badgeNosscr, alt: "NOSSCR Member" },
+  { src: badgeLawyer, alt: "David Pinyerd Lawyer.com Premium" },
+  { src: badgeThreeBestRated, alt: "2025 Award: Best Social Security Disability Lawyers in Indianapolis, Three Best Rated", variant: "medal" },
+];
+
+const practiceAreas = [
+  { icon: "/icons/icon-ssdi.svg", label: "Social Security Disability Insurance (SSDI)", href: "/practice-areas/ssdi" },
+  { icon: "/icons/icon-short-term.svg", label: "Short-Term Disability Insurance", href: "/practice-areas/short-term-disability" },
+  { icon: "/icons/icon-ssi.svg", label: "Supplemental Security Income (SSI)", href: "/practice-areas/ssi" },
+  { icon: "/icons/icon-long-term.svg", label: "Long-Term Disability Insurance", href: "/practice-areas/long-term-disability" },
+  { icon: "/icons/icon-veterans.svg", label: "Veterans Disability Benefits", href: "/practice-areas/veterans-disability" },
+];
+
+const testimonialReviews = [
+  {
+    quote:
+      "As a veteran trying to understand and claim my benefits, I found the support from Pinyerd Law to be helpful and informative. They took the time to explain the process and answer my questions, which made a big difference. Overall a great experience. Thank you so much",
+    name: "Janet Lincoln",
+    avatar: avatar1,
+  },
+  {
+    quote:
+      "They have been absolutely wonderful and easy to work with. I have fought for disability for over 20 years and was about to give up. Pinyerd Law helped me finally win my case. I really appreciate everything they have done for me.",
+    name: "Tammy Lehner",
+    avatar: avatar2,
+  },
+];
+
+const blogPosts = [
+  {
+    image: blogPost1,
+    date: "AUG 11, 2025",
+    category: "DISABILITY",
+    title: "Self Employed Disability Insurance: Eligibility Explained",
+    excerpt:
+      "Business owners, freelancers, consultants, farmers, and independent contractors do not automatically forfeit...",
+    href: "/blog/self-employed-disability-insurance-eligibility",
+  },
+  {
+    image: blogPost2,
+    date: "AUG 11, 2025",
+    category: "SOCIAL SECURITY",
+    title: "Mental Health Disability Benefits: Get the Support You Need",
+    excerpt:
+      "Mental health conditions can make steady, competitive work impossible even when their effects go unseen by...",
+    href: "/blog/mental-health-disability-benefits",
+  },
+  {
+    image: blogPost3,
+    date: "JUL 28, 2025",
+    category: "DISABILITY",
+    title: "Promising Signs That You Will Be Approved for Disability",
+    excerpt:
+      "Waiting on a disability decision can wear you down. You filed the paperwork, answered every question, and now the...",
+    href: "/blog/promising-signs-disability-approval",
+  },
+];
+
+const faqs = [
+  {
+    question: "What medical evidence do I need to support a disability claim?",
+    answer:
+      "We build every file with an eye toward what convinces the person deciding your case, since our team includes former SSA attorney advisors who once wrote those decisions. Social Security looks for complete records from your treating doctors, including diagnosis, treatment history, and imaging or lab results. Physician statements describing how your condition limits daily activities and work strengthen a claim further.",
+    open: true,
+  },
+  {
+    question: "Will I speak with an attorney myself at Pinyerd Law?",
+    answer:
+      "Yes. You will work directly with one of our lawyers throughout your case, not a legal assistant or case manager, and we remain available to answer questions and provide updates as your case moves forward.",
+  },
+  {
+    question: "What VA disability benefits can Pinyerd Law help with?",
+    answer:
+      "We represent veterans pursuing VA disability compensation alongside Social Security Disability claims, helping you understand how the two benefit types interact and what documentation each requires.",
+  },
+  {
+    question: "What should I do if my disability claim was denied?",
+    answer:
+      "Contact us as soon as possible. Appeal deadlines are strict, and our attorneys can review your denial, identify what went wrong, and continue fighting your case all the way up to the federal courts if necessary.",
+  },
+  {
+    question: "How long does it take to get approved for disability benefits?",
+    answer:
+      "Timelines vary by case complexity and the stage at which you engage us, but we work to keep your claim moving and will give you a realistic assessment after reviewing your specific circumstances.",
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Pinyerd Disability Law, LLC | Social Security & VA Disability Attorneys">
+  <main>
+    <Hero
+      backgroundImage={heroBg}
+      backgroundAlt="Pinyerd Disability Law attorneys standing together"
+      ratingValue="5.0"
+      ratingLabel="Internet's Top Rated Disability Attorney"
+      headline="Social Security Disability Attorneys Fighting for the Benefits You've Earned"
+      subheadline="Representing Clients in All 50 States"
+      ctaLabel="Call Us for a Consultation"
+      ctaHref="/contact"
+      trustLabel="No Fee Unless We Win"
+      secondaryLabel="Se habla español"
+      badges={heroBadges}
+    />
+
+    <VideoIntro
+      thumbnail={videoThumb}
+      thumbnailAlt="Chicago skyline video preview"
+      logo={videoLogo}
+      brandLabel="Pinyerd Disability Law"
+      videoTitle="Veterans Can Get Social Security Disability"
+      videoSubtitle="plus VA Disability"
+      playLabel="Play video"
+      eyebrow="Why Select Us?"
+      title="We understand your requirements and provide quality service."
+    />
+
+    <PracticeAreas
+      eyebrow="Our Practice Areas"
+      title="See How We Can Help You With Your Disability Case"
+      description="At Pinyerd Disability Law, LLC, we treat our clients like family. We have seen it all and are prepared to offer you the compassionate guidance you deserve when you are struggling to obtain disability benefits. Our attorneys have handled thousands of cases and won millions for our clients. You will work directly with our lawyers throughout our handling of your case, and we will walk you through all of your legal options for accessing the benefits you are entitled to."
+      areas={practiceAreas}
+    />
+
+    <ApproachSection
+      image={statue}
+      imageAlt="Lady Justice statue representing legal advocacy"
+      eyebrow="Our Firm's Approach"
+      title="Our Social Security Lawyers Are Ready to Help"
+      ctaLabel="Schedule a Free Evaluation"
+      ctaHref="/contact"
+    >
+      <p>
+        We understand that applying for disability benefits can be confusing, stressful, and frustrating. At
+        Pinyerd Disability Law, LLC, we treat our clients like family.
+      </p>
+      <p class="font-semibold">
+        No matter where you are in the process, we are here to support you and will give your claim the
+        sophisticated attention it demands.
+      </p>
+      <p>
+        Our Indianapolis disability law firm is willing to take cases at the initial stage and will continue
+        fighting all the way up to the federal courts.
+      </p>
+      <p>
+        When you come to us for help, you will speak directly with one of our lawyers, not a legal assistant or
+        case manager. Our attorneys will continue to be available to answer your questions and provide updates
+        throughout our handling of your case.
+      </p>
+      <p>
+        <span class="font-bold">We have a strong track record of winning cases</span>, and we believe our success
+        comes from our ability to dig deep and catch the smallest of details. We have seen it all, and no case is
+        too complex for us.
+      </p>
+    </ApproachSection>
+
+    <Testimonials
+      eyebrow="What They Say"
+      title="Words From Our Clients"
+      description="Testimonials from our clients from around the web."
+      ctaLabel="See All Reviews"
+      ctaHref="/testimonials"
+      reviews={testimonialReviews}
+    />
+
+    <AttorneyBio
+      eyebrow="David Pinyerd Bio"
+      title="Meet David Pinyerd, Founder and Managing Attorney"
+      photo={davidPhoto}
+      photoAlt="David Pinyerd, Founder and Managing Attorney"
+      storyEyebrow="The Story"
+      name="David Pinyerd"
+      bio="David Pinyerd is the distinguished founder, owner, and managing attorney of our esteemed law firm. With over twelve years of unwavering commitment to his clients, Mr. Pinyerd has personally represented thousands of individuals in their pursuit of disability benefits."
+      ctaLabel="Read More"
+      ctaHref="/about/david-pinyerd"
+    />
+
+    <FeatureBanner
+      variant="dark"
+      eyebrow="David Pinyerd Bio"
+      title="Meet David Pinyerd, Founder and Managing Attorney"
+      name="David Pinyerd"
+      bio="David Pinyerd is the distinguished founder, owner, and managing attorney of our esteemed law firm. With over twelve years of unwavering commitment."
+      href="/about/david-pinyerd"
+      ctaLabel="Read More"
+      image={featureBannerDark}
+    />
+
+    <FeatureBanner
+      variant="light"
+      eyebrow="David Pinyerd Bio"
+      title="Meet David Pinyerd, Founder and Managing Attorney"
+      name="David Pinyerd"
+      bio="David Pinyerd is the distinguished founder, owner, and managing attorney of our esteemed law firm. With over twelve years of unwavering commitment."
+      href="/about/david-pinyerd"
+      ctaLabel="Read More"
+      image={featureBannerLight}
+    />
+
+    <ContactForm
+      backgroundImage={formBg}
+      heading="Get Pinyerd Law on Your Side"
+      phoneDisplay="(317) 348-1800"
+      phoneHref="tel:3173481800"
+      servingLabel="Serving Clients Across All 50 States."
+      mapLabel="Map & Directions [+]"
+      mapHref="/locations"
+      description="Contact us online or call (317) 348-1800 to start discussing your legal options with disability attorneys.<br /><br />We offer flexible scheduling and can meet with you on weekends or after-hours."
+      formHeading="Reach Out Today to Speak With Our Experienced Attorneys"
+      reasonsLabel="Reason(s) for Inquiry"
+      reasons={[
+        "Social Security Disability Insurance",
+        "Supplemental Security Income",
+        "Veterans Disability",
+        "Camp Lejeune Water Contamination Lawsuit",
+      ]}
+      messageLabel="Tell Us More About Your Case"
+      submitLabel="Send Message"
+      formAction="/api/contact"
+    />
+
+    <BlogSection eyebrow="Latest News" title="Our Blog" posts={blogPosts} ctaLabel="View All" ctaHref="/blog" />
+
+    <FAQSection eyebrow="FAQ" title="Frequently Asked Questions" faqs={faqs} />
+  </main>
+</Layout>

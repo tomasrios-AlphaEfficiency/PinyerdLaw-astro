@@ -1,0 +1,33 @@
+---
+import SectionHeading from "../SectionHeading.astro";
+import PracticeAreaItem from "../PracticeAreaItem.astro";
+
+interface PracticeArea {
+  icon: string;
+  label: string;
+  href: string;
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  areas: PracticeArea[];
+}
+
+const { eyebrow, title, description, areas } = Astro.props;
+---
+
+<section class="flex flex-col items-center justify-center bg-surface px-6 py-16">
+  <div class="content flex flex-col gap-12 lg:gap-[70px]">
+    <SectionHeading eyebrow={eyebrow} title={title}>
+      <p class="font-sans text-base leading-loose tracking-wide text-ink">{description}</p>
+    </SectionHeading>
+
+    <div class="flex flex-wrap justify-between gap-y-5">
+      {areas.map((area) => (
+        <PracticeAreaItem icon={area.icon} label={area.label} href={area.href} />
+      ))}
+    </div>
+  </div>
+</section>

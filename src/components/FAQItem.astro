@@ -1,0 +1,50 @@
+---
+interface Props {
+  question: string;
+  answer: string;
+  open?: boolean;
+}
+
+const { question, answer, open = false } = Astro.props;
+---
+
+<div
+  class:list={[
+    "faq-item w-full overflow-hidden rounded-md border border-line bg-white shadow-[0_16px_40px_0_rgba(0,0,0,0.04),0_12px_30px_0_rgba(0,0,0,0.07)]",
+    open && "shadow-[inset_5px_0px_0px_0px_#153860]",
+  ]}
+>
+  <button
+    type="button"
+    class="faq-trigger flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+    aria-expanded={open}
+  >
+    <span class="font-sans text-lg font-medium text-navy-light">{question}</span>
+    <img
+      src="/icons/icon-chevron-down.svg"
+      alt=""
+      class:list={["faq-icon h-8 w-8 shrink-0 transition-transform", open ? "-rotate-90" : "rotate-90"]}
+      aria-hidden="true"
+    />
+  </button>
+  <div class="faq-panel px-6" style={`display:${open ? "block" : "none"}`}>
+    <p class="pb-6 font-sans text-base leading-relaxed text-ink">{answer}</p>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".faq-item").forEach((item) => {
+    const trigger = item.querySelector<HTMLButtonElement>(".faq-trigger");
+    const panel = item.querySelector<HTMLElement>(".faq-panel");
+    const icon = item.querySelector<HTMLImageElement>(".faq-icon");
+
+    trigger?.addEventListener("click", () => {
+      const isOpen = panel?.style.display === "block";
+      panel!.style.display = isOpen ? "none" : "block";
+      trigger.setAttribute("aria-expanded", String(!isOpen));
+      icon!.classList.toggle("-rotate-90", !isOpen);
+      icon!.classList.toggle("rotate-90", isOpen);
+      item.classList.toggle("shadow-[inset_5px_0px_0px_0px_#153860]", !isOpen);
+    });
+  });
+</script>

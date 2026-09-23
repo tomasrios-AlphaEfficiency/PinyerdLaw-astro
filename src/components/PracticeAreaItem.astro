@@ -1,0 +1,20 @@
+---
+interface Props {
+  icon: string;
+  label: string;
+  href?: string;
+}
+
+const { icon, label, href = "#" } = Astro.props;
+---
+
+<a
+  href={href}
+  class="card-surface flex h-[60px] w-full items-center justify-between px-7 py-4 transition-shadow hover:shadow-md lg:w-[530px]"
+>
+  <div class="flex items-center gap-6">
+    <img src={icon} alt="" class="h-6 w-6" aria-hidden="true" />
+    <span class="whitespace-nowrap font-serif text-lg tracking-wide text-ink">{label}</span>
+  </div>
+  <img src="/icons/icon-chevron-right.svg" alt="" class="h-3 w-1.5" aria-hidden="true" />
+</a>

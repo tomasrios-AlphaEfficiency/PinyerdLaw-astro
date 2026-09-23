@@ -1,1 +1,51 @@
 @import "tailwindcss";
+
+@theme {
+  --font-serif: "Prata", serif;
+  --font-sans: "Montserrat", sans-serif;
+
+  --color-navy: #161e40;
+  --color-navy-light: #153860;
+  --color-maroon: #9f2026;
+  --color-ink: #060606;
+  --color-surface: #f9f9f9;
+  --color-line: #ddd;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background: #fff;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+  }
+}
+
+@layer components {
+  /* Centers section content at the design's 1220px content width. */
+  .content {
+    @apply mx-auto w-full max-w-[1220px];
+  }
+
+  .eyebrow-text {
+    @apply font-sans text-lg font-medium text-navy-light;
+  }
+
+  .heading-divider {
+    @apply h-px w-[65px] bg-[#303030];
+  }
+
+  .card-surface {
+    @apply rounded-md border border-line bg-white shadow-[0_6px_15px_0_rgba(0,0,0,0.03)];
+  }
+}

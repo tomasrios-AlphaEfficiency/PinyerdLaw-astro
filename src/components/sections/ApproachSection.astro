@@ -1,0 +1,34 @@
+---
+import { Image, type ImageMetadata } from "astro:assets";
+import SectionHeading from "../SectionHeading.astro";
+import Button from "../Button.astro";
+
+interface Props {
+  image: ImageMetadata;
+  imageAlt: string;
+  eyebrow: string;
+  title: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+const { image, imageAlt, eyebrow, title, ctaLabel, ctaHref } = Astro.props;
+---
+
+<section class="flex flex-col items-center bg-white px-6 py-16 lg:py-[140px]">
+  <div class="content flex flex-col items-center justify-between gap-10 lg:flex-row">
+    <div class="h-[360px] w-full overflow-hidden rounded-md bg-[#e4e5eb] sm:h-[500px] lg:h-[775px] lg:w-[620px] lg:shrink-0">
+      <Image src={image} alt={imageAlt} class="h-full w-full object-cover" width={620} height={775} fit="cover" />
+    </div>
+
+    <div class="flex w-full flex-col items-start gap-9 lg:w-[497px]">
+      <SectionHeading eyebrow={eyebrow} title={title} />
+
+      <div class="flex flex-col gap-4 text-justify font-sans text-base leading-relaxed text-ink">
+        <slot />
+      </div>
+
+      <Button href={ctaHref} variant="solid">{ctaLabel}</Button>
+    </div>
+  </div>
+</section>

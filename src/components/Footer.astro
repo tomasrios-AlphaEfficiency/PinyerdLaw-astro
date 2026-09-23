@@ -1,0 +1,147 @@
+---
+import { Image, type ImageMetadata } from "astro:assets";
+
+interface Location {
+  title: string;
+  lines: string[];
+}
+
+interface Social {
+  icon: string;
+  label: string;
+  href: string;
+}
+
+interface FooterLink {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  photo: ImageMetadata;
+  photoAlt: string;
+  locations: Location[];
+  logo: ImageMetadata;
+  logoAlt: string;
+  tagline: string[];
+  socials: Social[];
+  links: FooterLink[];
+  ctaTitle: string;
+  ctaDescription: string;
+  ctaLabel: string;
+  ctaHref: string;
+  disclaimer: string[];
+}
+
+const {
+  photo,
+  photoAlt,
+  locations,
+  logo,
+  logoAlt,
+  tagline,
+  socials,
+  links,
+  ctaTitle,
+  ctaDescription,
+  ctaLabel,
+  ctaHref,
+  disclaimer,
+} = Astro.props;
+---
+
+<footer class="bg-navy px-6 py-16">
+  <div class="content flex flex-col gap-8">
+    <div class="flex flex-col gap-6 lg:flex-row">
+      <div class="relative h-[220px] w-full overflow-hidden rounded-md lg:h-[341px] lg:w-[629px] lg:shrink-0">
+        <Image src={photo} alt={photoAlt} class="h-full w-full object-cover" width={629} height={341} fit="cover" />
+      </div>
+
+      <div class="flex w-full flex-col justify-between gap-7">
+        <div class="flex w-full items-center gap-3">
+          <p class="whitespace-nowrap font-sans text-base font-medium uppercase tracking-wide text-white">
+            Our Locations
+          </p>
+          <div class="h-px w-full bg-white/40"></div>
+        </div>
+
+        <div class="flex flex-col items-end gap-7">
+          {locations.map((loc, i) => (
+            <>
+              <div class="flex w-full items-start gap-3">
+                <img src="/icons/icon-location-pin.svg" alt="" class="h-12 w-12 shrink-0" aria-hidden="true" />
+                <div class="flex flex-col gap-3 text-white">
+                  <p class="font-sans text-base font-semibold">{loc.title}</p>
+                  <p class="font-sans text-base leading-snug">
+                    {loc.lines.map((line) => <span class="block">{line}</span>)}
+                  </p>
+                </div>
+              </div>
+              {i < locations.length - 1 && <div class="h-px w-full bg-white/40"></div>}
+            </>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-8 border-y border-white/50 py-5 lg:flex-row lg:items-stretch">
+      <div class="flex flex-1 flex-col gap-8">
+        <img src={logo.src} alt={logoAlt} class="h-[57px] w-auto" />
+        <p class="font-sans text-base text-white">
+          {tagline.map((line, i) => (
+            <>
+              {line}
+              {i < tagline.length - 1 && <br />}
+            </>
+          ))}
+        </p>
+        <div class="flex gap-2.5">
+          {socials.map((s) => (
+            <a
+              href={s.href}
+              aria-label={s.label}
+              class="flex h-[34px] w-[34px] items-center justify-center rounded border border-white/50 bg-navy"
+            >
+              <img src={s.icon} alt="" class="h-5 w-5" aria-hidden="true" />
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="hidden w-px bg-white/20 lg:block"></div>
+
+      <div class="flex flex-col justify-center gap-4 lg:px-12">
+        {links.map((link) => (
+          <div class="flex w-full items-center justify-between gap-8 border-b border-white/10 py-1 lg:w-[242px]">
+            <a href={link.href} class="font-sans text-base text-white">{link.label}</a>
+            <img src="/icons/icon-chevron-right-circle.svg" alt="" class="h-8 w-8 rotate-180" aria-hidden="true" />
+          </div>
+        ))}
+      </div>
+
+      <div class="flex flex-1 items-start rounded-xl bg-[rgba(104,160,224,0.07)] p-6">
+        <div class="flex flex-1 flex-col gap-6">
+          <div class="flex flex-col gap-4 text-white">
+            <p class="font-sans text-base font-semibold">{ctaTitle}</p>
+            <p class="font-sans text-base">{ctaDescription}</p>
+          </div>
+          <a
+            href={ctaHref}
+            class="flex h-[50px] items-center justify-center rounded-xl bg-white px-8 font-sans text-base font-medium text-ink"
+          >
+            {ctaLabel}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-center font-sans text-xs font-light text-white">
+      {disclaimer.map((paragraph, i) => (
+        <>
+          {paragraph}
+          {i < disclaimer.length - 1 && <br />}
+        </>
+      ))}
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,70 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import footerPhoto from "../assets/images/footer-photo.png";
+import footerLogo from "../assets/images/logo-white.png";
+import {
+  siteNavLinks,
+  siteFooterLocations,
+  siteFooterSocials,
+  siteFooterLinks,
+  siteFooterDisclaimer,
+  siteContact,
+} from "../data/site";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "Pinyerd Disability Law, LLC represents Social Security Disability and VA Disability clients nationwide.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/icons/logo.svg" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Prata&family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Navbar
+      logoSrc="/icons/logo.svg"
+      logoAlt="Pinyerd Disability Law, LLC"
+      links={siteNavLinks}
+      contactLabel={siteContact.label}
+      contactHref={siteContact.href}
+    />
+
+    <slot />
+
+    <Footer
+      photo={footerPhoto}
+      photoAlt="Map of Pinyerd Disability Law office locations"
+      locations={siteFooterLocations}
+      logo={footerLogo}
+      logoAlt="Pinyerd Disability Law, LLC"
+      tagline={["Advocating for the rights and dignity", "of people with disabilities."]}
+      socials={siteFooterSocials}
+      links={siteFooterLinks}
+      ctaTitle="Questions? We're here to help."
+      ctaDescription="Contact us today for a free consultation."
+      ctaLabel={siteContact.label}
+      ctaHref={siteContact.href}
+      disclaimer={siteFooterDisclaimer}
+    />
+  </body>
+</html>

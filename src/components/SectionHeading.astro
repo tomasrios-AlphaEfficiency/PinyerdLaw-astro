@@ -1,0 +1,40 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  align?: "left" | "center";
+  light?: boolean;
+  titleSize?: "md" | "lg";
+  class?: string;
+}
+
+const { eyebrow, title, align = "left", light = false, titleSize = "md", class: className = "" } = Astro.props;
+
+const titleSizes: Record<string, string> = {
+  md: "text-[30px]",
+  lg: "text-3xl sm:text-4xl lg:text-[52px]",
+};
+---
+
+<div
+  class:list={[
+    "flex flex-col gap-5",
+    align === "center" ? "items-center text-center" : "items-start text-left",
+    className,
+  ]}
+>
+  <p class:list={["eyebrow-text", light && "text-white/80"]}>
+    {eyebrow}
+  </p>
+  <h2
+    class:list={[
+      "font-serif leading-tight",
+      titleSizes[titleSize],
+      light ? "text-white" : "text-ink",
+    ]}
+  >
+    <slot name="title">{title}</slot>
+  </h2>
+  <div class:list={["heading-divider", light && "bg-white"]}></div>
+  <slot />
+</div>

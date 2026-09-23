@@ -1,0 +1,25 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<div class:list={["relative aspect-[133.536/55.195] w-auto", className]} role="img" aria-label="BBB Accredited Business A+ Rating">
+  <div class="absolute inset-[0.86%_20.21%_0.86%_-0.16%]">
+    <img src="/icons/badge-bbb-1.svg" alt="" class="block h-full w-full" aria-hidden="true" />
+  </div>
+  <div class="absolute inset-[23.5%_45.56%_31.96%_22.4%]">
+    <img src="/icons/badge-bbb-2.svg" alt="" class="block h-full w-full" aria-hidden="true" />
+  </div>
+  <div class="absolute inset-[74.04%_49.33%_21.52%_22.42%]">
+    <img src="/icons/badge-bbb-3.svg" alt="" class="block h-full w-full" aria-hidden="true" />
+  </div>
+  <div class="absolute inset-[23.34%_79.25%_31.91%_11.61%]">
+    <img src="/icons/badge-bbb-4.svg" alt="" class="block h-full w-full" aria-hidden="true" />
+  </div>
+  <div class="absolute inset-[0.86%_0.23%_0.86%_59.81%]">
+    <img src="/icons/badge-bbb-5.svg" alt="" class="block h-full w-full" aria-hidden="true" />
+  </div>
+</div>

@@ -1,0 +1,62 @@
+---
+import { Image, type ImageMetadata } from "astro:assets";
+import SectionHeading from "../SectionHeading.astro";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  name: string;
+  bio: string;
+  href: string;
+  ctaLabel: string;
+  variant: "dark" | "light";
+  image: ImageMetadata;
+}
+
+const { eyebrow, title, name, bio, href, ctaLabel, variant, image } = Astro.props;
+const isDark = variant === "dark";
+---
+
+<section class="flex flex-col items-center justify-center bg-surface px-6 py-16 lg:py-[100px]">
+  <div class="content flex flex-col gap-12 lg:gap-[70px]">
+    <SectionHeading eyebrow={eyebrow} title={title} />
+
+    {isDark ? (
+      <div class="relative flex h-[320px] w-full items-center justify-end overflow-hidden rounded-xl border border-line bg-[#37373b] shadow-[-6px_-6px_27.6px_0_rgba(111,145,200,0.15),0_25px_50px_-12px_rgba(0,0,0,0.15)] lg:h-[434px]">
+        <div class="absolute inset-y-0 left-0 w-full lg:w-[47%]">
+          <Image src={image} alt={name} class="h-full w-full object-cover" width={569} height={434} fit="cover" />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-[#37373b]/80 via-40% to-[#37373b] to-60%"></div>
+
+        <div class="relative z-10 flex w-full max-w-[584px] flex-col items-start gap-8 px-8 lg:px-16">
+          <h3 class="font-serif text-3xl tracking-tight text-white lg:text-[40px]">{name}</h3>
+          <div class="h-px w-[65px] bg-white"></div>
+          <p class="font-sans text-lg leading-relaxed tracking-tight text-white">{bio}</p>
+          <a
+            href={href}
+            class="rounded-xl bg-white px-8 py-3 font-sans text-base font-medium text-navy"
+          >
+            {ctaLabel}
+          </a>
+        </div>
+      </div>
+    ) : (
+      <div class="flex h-auto w-full flex-col overflow-hidden rounded-xl border border-line shadow-[-6px_-6px_27.6px_0_rgba(111,145,200,0.15),0_25px_50px_-12px_rgba(0,0,0,0.15)] lg:h-[434px] lg:flex-row">
+        <div class="relative h-[220px] w-full shrink-0 bg-[#333437] lg:h-full lg:w-[519px]">
+          <Image src={image} alt={name} class="absolute inset-0 h-full w-full object-cover" width={519} height={434} fit="cover" />
+        </div>
+        <div class="flex flex-1 flex-col items-start justify-center gap-8 bg-white px-8 py-10 lg:px-[82px]">
+          <h3 class="font-serif text-3xl tracking-tight text-navy-light lg:text-[40px]">{name}</h3>
+          <div class="h-px w-[65px] bg-navy-light"></div>
+          <p class="font-sans text-lg leading-relaxed tracking-tight text-navy-light">{bio}</p>
+          <a
+            href={href}
+            class="rounded-xl bg-maroon px-8 py-4 font-sans text-base font-medium text-white"
+          >
+            {ctaLabel}
+          </a>
+        </div>
+      </div>
+    )}
+  </div>
+</section>

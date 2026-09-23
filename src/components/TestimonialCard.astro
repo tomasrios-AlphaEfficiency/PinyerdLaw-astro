@@ -1,0 +1,28 @@
+---
+import { Image, type ImageMetadata } from "astro:assets";
+
+interface Props {
+  quote: string;
+  name: string;
+  avatar: ImageMetadata;
+}
+
+const { quote, name, avatar } = Astro.props;
+---
+
+<article class="flex h-[350px] w-full flex-col justify-between rounded-md border border-line bg-white px-8 py-10 shadow-[0_27px_40px_rgba(0,0,0,0.03),0_6px_7.5px_rgba(0,0,0,0.03)] sm:w-[393px]">
+  <p class="font-sans text-base leading-relaxed tracking-tight text-ink">&ldquo;{quote}&rdquo;</p>
+
+  <div class="flex flex-col gap-4">
+    <div class="h-px w-full bg-[#ededed]"></div>
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="h-12 w-12 overflow-hidden rounded-full border-2 border-white shadow-[0_0_0_2px_#9f2026]">
+          <Image src={avatar} alt={name} class="h-full w-full object-cover" width={48} height={48} fit="cover" />
+        </div>
+        <p class="font-sans text-sm text-ink">{name}</p>
+      </div>
+      <img src="/icons/icon-stars-5.svg" alt="5 out of 5 stars" class="h-4 w-[86px]" />
+    </div>
+  </div>
+</article>

@@ -1,0 +1,51 @@
+---
+import { Image, type ImageMetadata } from "astro:assets";
+import SectionHeading from "../SectionHeading.astro";
+
+interface Props {
+  thumbnail: ImageMetadata;
+  thumbnailAlt: string;
+  logo: ImageMetadata;
+  brandLabel: string;
+  videoTitle: string;
+  videoSubtitle: string;
+  playLabel: string;
+  eyebrow: string;
+  title: string;
+}
+
+const { thumbnail, thumbnailAlt, logo, brandLabel, videoTitle, videoSubtitle, playLabel, eyebrow, title } =
+  Astro.props;
+---
+
+<section class="flex flex-col items-center bg-white px-6 py-16 lg:py-[120px]">
+  <div class="content flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-between">
+    <div class="relative h-[280px] w-full overflow-hidden rounded-md bg-navy sm:h-[348px] lg:h-[348px] lg:w-[620px] lg:shrink-0">
+      <Image src={thumbnail} alt={thumbnailAlt} class="absolute inset-0 h-full w-full object-cover" width={620} height={348} fit="cover" />
+      <div class="absolute inset-0 bg-gradient-to-tr from-navy/70 via-transparent to-transparent"></div>
+
+      <div class="absolute left-8 top-6 flex items-center gap-2">
+        <img src={logo.src} alt="" class="h-7 w-auto opacity-80" aria-hidden="true" />
+        <span class="font-serif text-sm text-white/80">{brandLabel}</span>
+      </div>
+
+      <button
+        type="button"
+        aria-label={playLabel}
+        class="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-maroon shadow-lg"
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="white"><path d="M4 2.5v15l14-7.5z"/></svg>
+      </button>
+
+      <div class="absolute bottom-8 left-8 flex flex-col gap-1">
+        <div class="h-px w-10 bg-white"></div>
+        <p class="font-serif text-xl text-white">{videoTitle}</p>
+        <p class="font-serif text-sm text-white">{videoSubtitle}</p>
+      </div>
+    </div>
+
+    <div class="flex w-full flex-col gap-5 lg:w-[497px]">
+      <SectionHeading eyebrow={eyebrow} title={title} titleSize="lg" />
+    </div>
+  </div>
+</section>

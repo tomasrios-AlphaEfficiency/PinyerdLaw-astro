@@ -1,0 +1,31 @@
+---
+interface Props {
+  href?: string;
+  variant?: "solid" | "outline-dark" | "outline-light" | "white";
+  class?: string;
+  icon?: "phone" | "none";
+}
+
+const { href = "#", variant = "solid", class: className = "", icon = "none" } = Astro.props;
+
+const variants: Record<string, string> = {
+  solid: "bg-maroon text-white hover:bg-[#84181d]",
+  "outline-dark": "border border-navy text-navy hover:bg-navy hover:text-white",
+  "outline-light": "border border-white/60 text-white hover:bg-white/10",
+  white: "bg-white text-navy hover:bg-white/90",
+};
+---
+
+<a
+  href={href}
+  class:list={[
+    "inline-flex w-fit items-center justify-center gap-3 rounded-xl px-8 py-4 font-sans text-base font-medium leading-none transition-colors",
+    variants[variant],
+    className,
+  ]}
+>
+  {icon === "phone" && (
+    <img src="/icons/icon-phone.svg" alt="" class="h-4 w-4" aria-hidden="true" />
+  )}
+  <slot />
+</a>
