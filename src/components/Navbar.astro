@@ -79,6 +79,9 @@ const { logoSrc, logoAlt, links, contactLabel, contactHref, phoneLabel, phoneHre
     z-index: 50;
     background: var(--color-white);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+    /* Padding lives on the (full-width) header, not on `.content` itself, so `.content`
+       stays exactly 1220px wide instead of that width being eaten by border-box padding. */
+    padding-inline: var(--gutter);
   }
 
   .navbar-call-strip {
@@ -86,6 +89,9 @@ const { logoSrc, logoAlt, links, contactLabel, contactHref, phoneLabel, phoneHre
     align-items: center;
     justify-content: center;
     gap: 12px;
+    /* `.navbar` carries `padding-inline: var(--gutter)` so `.content` stays exactly 1220px;
+       this strip is a full-bleed banner, so it must cancel that padding out to reach the edges. */
+    margin-inline: calc(-1 * var(--gutter));
     background: var(--color-maroon);
     padding: 4px 32px;
     font-family: var(--font-sans);
@@ -105,7 +111,7 @@ const { logoSrc, logoAlt, links, contactLabel, contactHref, phoneLabel, phoneHre
     align-items: center;
     justify-content: space-between;
     gap: 32px;
-    padding: 24px var(--gutter);
+    padding-block: 24px;
   }
 
   .navbar-logo-link {

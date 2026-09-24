@@ -1,5 +1,5 @@
 ---
-import { Image, type ImageMetadata } from "astro:assets";
+import type { ImageMetadata } from "astro:assets";
 
 interface Location {
   title: string;
@@ -18,8 +18,8 @@ interface FooterLink {
 }
 
 interface Props {
-  photo: ImageMetadata;
-  photoAlt: string;
+  mapEmbedSrc: string;
+  mapTitle?: string;
   locations: Location[];
   logo: ImageMetadata;
   logoAlt: string;
@@ -34,8 +34,8 @@ interface Props {
 }
 
 const {
-  photo,
-  photoAlt,
+  mapEmbedSrc,
+  mapTitle = "Map of Pinyerd Disability Law office locations",
   locations,
   logo,
   logoAlt,
@@ -54,7 +54,13 @@ const {
   <div class="content footer-inner">
     <div class="footer-top">
       <div class="footer-photo">
-        <Image src={photo} alt={photoAlt} width={629} height={341} fit="cover" />
+        <iframe
+          src={mapEmbedSrc}
+          title={mapTitle}
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
       </div>
 
       <div class="footer-locations">
@@ -152,21 +158,24 @@ const {
   .footer-top {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     gap: 24px;
   }
 
   .footer-photo {
     position: relative;
-    height: 220px;
+    aspect-ratio: 629 / 341;
     width: 100%;
     overflow: hidden;
     border-radius: 6px;
   }
 
-  .footer-photo :global(img) {
+  .footer-photo iframe {
+    position: absolute;
+    inset: 0;
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    border: 0;
   }
 
   .footer-locations {
@@ -268,6 +277,10 @@ const {
   .footer-logo {
     height: 57px;
     width: auto;
+    /* `.footer-brand` is a column flex container, so without this the image (a flex item)
+       stretches to the container's full width by default cross-axis stretch, distorting it. */
+    align-self: flex-start;
+    margin-left: -7px;
   }
 
   .footer-tagline {
@@ -295,6 +308,7 @@ const {
   .footer-social-icon {
     height: 20px;
     width: 20px;
+    object-fit: contain;
   }
 
   .footer-middle-divider {
@@ -394,7 +408,6 @@ const {
     }
 
     .footer-photo {
-      height: 341px;
       width: 629px;
       flex-shrink: 0;
     }

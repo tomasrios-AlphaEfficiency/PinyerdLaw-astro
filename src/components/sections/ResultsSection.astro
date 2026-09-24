@@ -1,0 +1,113 @@
+---
+import SectionHeading from "../SectionHeading.astro";
+import ResultCard from "../ResultCard.astro";
+
+interface Result {
+  amount: string;
+  description: string;
+}
+
+interface ResultGroup {
+  label: string;
+  results: Result[];
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  groups: ResultGroup[];
+}
+
+const { eyebrow, title, description, groups } = Astro.props;
+---
+
+<section class="results">
+  <div class="content results-inner">
+    <SectionHeading eyebrow={eyebrow} title={title} titleSize="lg">
+      <p class="results-description">{description}</p>
+    </SectionHeading>
+
+    <div class="results-groups">
+      {groups.map((group) => (
+        <div class="results-group">
+          <p class="results-group-label">{group.label}</p>
+          <div class="results-group-list">
+            {group.results.map((result) => (
+              <ResultCard amount={result.amount} label={group.label} description={result.description} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-surface);
+    padding: 64px var(--gutter);
+  }
+
+  .results-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .results-description {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+    color: var(--color-ink);
+  }
+
+  .results-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .results-group {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .results-group-label {
+    font-family: var(--font-serif);
+    font-size: 27px;
+    color: var(--color-ink);
+  }
+
+  .results-group-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 640px) {
+    .results-group-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .results-inner {
+      gap: 70px;
+    }
+
+    .results-groups {
+      gap: 70px;
+    }
+
+    .results-group-list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

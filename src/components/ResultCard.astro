@@ -1,0 +1,65 @@
+---
+interface Props {
+  amount: string;
+  label: string;
+  description: string;
+}
+
+const { amount, label, description } = Astro.props;
+---
+
+<div class="result-card">
+  <div class="result-card-figures">
+    <p class="result-card-amount">{amount}</p>
+    <p class="result-card-label">{label}</p>
+    <div class="result-card-divider"></div>
+  </div>
+  <p class="result-card-description">{description}</p>
+</div>
+
+<style>
+  .result-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 19px;
+    border-radius: 6px;
+    border: 1px solid var(--color-line);
+    background: var(--color-white);
+    box-shadow: 0 6px 15px 0 rgba(0, 0, 0, 0.03);
+    padding: 32px 25px;
+    text-align: center;
+  }
+
+  .result-card-figures {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .result-card-amount {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    color: var(--color-navy-light);
+  }
+
+  .result-card-label {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    color: var(--color-ink);
+  }
+
+  .result-card-divider {
+    height: 1px;
+    width: 128px;
+    background: #303030;
+  }
+
+  .result-card-description {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--color-ink);
+  }
+</style>

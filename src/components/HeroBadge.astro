@@ -6,11 +6,12 @@ interface Props {
   badge: {
     src: ImageMetadata | string;
     alt: string;
-    variant?: "image" | "medal";
+    variant?: "image" | "medal" | "compact";
   };
 }
 
 const { badge } = Astro.props;
+const imageClass = `hero-badge hero-badge--image${badge.variant === "compact" ? " hero-badge--compact" : ""}`;
 ---
 
 {badge.src === "bbb" ? (
@@ -19,12 +20,12 @@ const { badge } = Astro.props;
   typeof badge.src === "string" ? (
     <img src={badge.src} alt={badge.alt} class="hero-badge hero-badge--medal" />
   ) : (
-    <Image src={badge.src} alt={badge.alt} class="hero-badge hero-badge--medal" width={390} height={450} />
+    <Image src={badge.src} alt={badge.alt} class="hero-badge hero-badge--medal" width={600} />
   )
 ) : typeof badge.src === "string" ? (
-  <img src={badge.src} alt={badge.alt} class="hero-badge hero-badge--image" />
+  <img src={badge.src} alt={badge.alt} class={imageClass} />
 ) : (
-  <Image src={badge.src} alt={badge.alt} class="hero-badge hero-badge--image" height={48} />
+  <Image src={badge.src} alt={badge.alt} class={imageClass} height={48} />
 )}
 
 <style>
@@ -36,6 +37,7 @@ const { badge } = Astro.props;
 
   .hero-badge--image {
     object-fit: contain;
+    object-position: bottom;
   }
 
   .hero-badge.hero-badge--medal {
@@ -45,9 +47,20 @@ const { badge } = Astro.props;
     object-position: bottom;
   }
 
+  /* The second mobile row (IndyBar, NOSSCR, David Pinyerd Lawyer.com) uses visibly shorter
+     logos than the first row in Figma, so it needs its own smaller height to keep the row's
+     fixed gap reading the same as the first row instead of stretching to fill leftover space. */
+  .hero-badge.hero-badge--compact {
+    height: 34px;
+  }
+
   @media (min-width: 640px) {
     .hero-badge {
       height: 48px;
+    }
+
+    .hero-badge.hero-badge--compact {
+      height: 40px;
     }
   }
 </style>

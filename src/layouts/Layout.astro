@@ -2,7 +2,6 @@
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-import footerPhoto from "../assets/images/footer-photo.png";
 import footerLogo from "../assets/images/logo-white.png";
 import {
   siteNavLinks,
@@ -12,6 +11,7 @@ import {
   siteFooterDisclaimer,
   siteContact,
   sitePhone,
+  siteMapEmbedSrc,
 } from "../data/site";
 
 interface Props {
@@ -55,8 +55,8 @@ const {
     <slot />
 
     <Footer
-      photo={footerPhoto}
-      photoAlt="Map of Pinyerd Disability Law office locations"
+      mapEmbedSrc={siteMapEmbedSrc}
+      mapTitle="Map of Pinyerd Disability Law office locations"
       locations={siteFooterLocations}
       logo={footerLogo}
       logoAlt="Pinyerd Disability Law, LLC"

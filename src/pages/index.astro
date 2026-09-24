@@ -6,10 +6,10 @@ import PracticeAreas from "../components/sections/PracticeAreas.astro";
 import ApproachSection from "../components/sections/ApproachSection.astro";
 import Testimonials from "../components/sections/Testimonials.astro";
 import AttorneyBio from "../components/sections/AttorneyBio.astro";
-import FeatureBanner from "../components/sections/FeatureBanner.astro";
 import ContactForm from "../components/sections/ContactForm.astro";
 import BlogSection from "../components/sections/BlogSection.astro";
 import FAQSection from "../components/sections/FAQSection.astro";
+import { sitePracticeAreas, siteTestimonialReviews } from "../data/site";
 
 import heroBg from "../assets/images/hero-bg.png";
 import badgeLawyersOfDistinction from "../assets/images/badge-lawyers-of-distinction.png";
@@ -22,11 +22,7 @@ import badgeThreeBestRated from "../assets/images/hero-side-image.png";
 import videoThumb from "../assets/images/video-thumb.png";
 import videoLogo from "../assets/images/logo-white.png";
 import statue from "../assets/images/statue.png";
-import avatar1 from "../assets/images/avatar-1.png";
-import avatar2 from "../assets/images/avatar-2.png";
 import davidPhoto from "../assets/images/david-pinyerd.png";
-import featureBannerDark from "../assets/images/feature-banner-dark.png";
-import featureBannerLight from "../assets/images/feature-banner-light-2.png";
 import formBg from "../assets/images/form-bg.png";
 import blogPost1 from "../assets/images/blog-post-1-bg.png";
 import blogPost2 from "../assets/images/blog-post-2.png";
@@ -37,33 +33,10 @@ const heroBadges = [
   { src: badgeLawyersOfDistinction, alt: "Lawyers of Distinction" },
   { src: badge2, alt: "NOVA Top 5 Lawyers of Distinction" },
   { src: badgeFindLaw, alt: "FindLaw Badge" },
-  { src: badge4, alt: "IndyBar Association" },
-  { src: badgeNosscr, alt: "NOSSCR Member" },
-  { src: badgeLawyer, alt: "David Pinyerd Lawyer.com Premium" },
+  { src: badge4, alt: "IndyBar Association", variant: "compact" },
+  { src: badgeNosscr, alt: "NOSSCR Member", variant: "compact" },
+  { src: badgeLawyer, alt: "David Pinyerd Lawyer.com Premium", variant: "compact" },
   { src: badgeThreeBestRated, alt: "2025 Award: Best Social Security Disability Lawyers in Indianapolis, Three Best Rated", variant: "medal" },
-];
-
-const practiceAreas = [
-  { icon: "/icons/icon-ssdi.svg", label: "Social Security Disability Insurance (SSDI)", href: "/practice-areas/ssdi" },
-  { icon: "/icons/icon-short-term.svg", label: "Short-Term Disability Insurance", href: "/practice-areas/short-term-disability" },
-  { icon: "/icons/icon-ssi.svg", label: "Supplemental Security Income (SSI)", href: "/practice-areas/ssi" },
-  { icon: "/icons/icon-long-term.svg", label: "Long-Term Disability Insurance", href: "/practice-areas/long-term-disability" },
-  { icon: "/icons/icon-veterans.svg", label: "Veterans Disability Benefits", href: "/practice-areas/veterans-disability" },
-];
-
-const testimonialReviews = [
-  {
-    quote:
-      "As a veteran trying to understand and claim my benefits, I found the support from Pinyerd Law to be helpful and informative. They took the time to explain the process and answer my questions, which made a big difference. Overall a great experience. Thank you so much",
-    name: "Janet Lincoln",
-    avatar: avatar1,
-  },
-  {
-    quote:
-      "They have been absolutely wonderful and easy to work with. I have fought for disability for over 20 years and was about to give up. Pinyerd Law helped me finally win my case. I really appreciate everything they have done for me.",
-    name: "Tammy Lehner",
-    avatar: avatar2,
-  },
 ];
 
 const blogPosts = [
@@ -106,22 +79,22 @@ const faqs = [
   {
     question: "Will I speak with an attorney myself at Pinyerd Law?",
     answer:
-      "Yes. You will work directly with one of our lawyers throughout your case, not a legal assistant or case manager, and we remain available to answer questions and provide updates as your case moves forward.",
+      "Working with a firm that keeps you at a distance only adds stress you don't need, and it can weaken your case, since a case manager without legal training misses what a lawyer catches. At Pinyerd Disability Law, LLC, you speak with one of our lawyers, never a case manager or legal assistant, from the first call through federal court if that becomes necessary.",
   },
   {
     question: "What VA disability benefits can Pinyerd Law help with?",
     answer:
-      "We represent veterans pursuing VA disability compensation alongside Social Security Disability claims, helping you understand how the two benefit types interact and what documentation each requires.",
+      "Veteran claims move through a system with its own internal playbook, and our team includes former VA staff who've sat on the other side of that desk. That experience shapes how we frame your file, which conditions to document together, which evidence VA raters weigh most, and where claims often lose points. VA disability compensation runs from about $180 a month at 10 percent up to about $3,938 a month at 100 percent, plus added amounts for dependents.",
   },
   {
     question: "What should I do if my disability claim was denied?",
     answer:
-      "Contact us as soon as possible. Appeal deadlines are strict, and our attorneys can review your denial, identify what went wrong, and continue fighting your case all the way up to the federal courts if necessary.",
+      "Many strong disability cases include a denial before they succeed. You can request reconsideration within 60 days, and if that's denied too, a hearing before an administrative law judge comes next. Our team built its reputation on catching the small details a first review missed, the kind of detail that turns a denial into an approval on appeal.",
   },
   {
     question: "How long does it take to get approved for disability benefits?",
     answer:
-      "Timelines vary by case complexity and the stage at which you engage us, but we work to keep your claim moving and will give you a realistic assessment after reviewing your specific circumstances.",
+      "Waiting for a decision is often the hardest part of the process. Initial SSDI applications take an average of six to eight months to process, though the exact time depends on your state and the complexity of your medical case. Complete medical records at filing can help avoid delays. We monitor your claim status and let you know the moment there is an update.",
   },
 ];
 ---
@@ -158,7 +131,7 @@ const faqs = [
       eyebrow="Our Practice Areas"
       title="See How We Can Help You With Your Disability Case"
       description="At Pinyerd Disability Law, LLC, we treat our clients like family. We have seen it all and are prepared to offer you the compassionate guidance you deserve when you are struggling to obtain disability benefits. Our attorneys have handled thousands of cases and won millions for our clients. You will work directly with our lawyers throughout our handling of your case, and we will walk you through all of your legal options for accessing the benefits you are entitled to."
-      areas={practiceAreas}
+      areas={sitePracticeAreas}
     />
 
     <ApproachSection
@@ -199,7 +172,7 @@ const faqs = [
       description="Testimonials from our clients from around the web."
       ctaLabel="See All Reviews"
       ctaHref="/testimonials"
-      reviews={testimonialReviews}
+      reviews={siteTestimonialReviews}
     />
 
     <AttorneyBio
@@ -214,49 +187,7 @@ const faqs = [
       ctaHref="/about/david-pinyerd"
     />
 
-    <FeatureBanner
-      variant="dark"
-      eyebrow="David Pinyerd Bio"
-      title="Meet David Pinyerd, Founder and Managing Attorney"
-      name="David Pinyerd"
-      bio="David Pinyerd is the distinguished founder, owner, and managing attorney of our esteemed law firm. With over twelve years of unwavering commitment."
-      href="/about/david-pinyerd"
-      ctaLabel="Read More"
-      image={featureBannerDark}
-    />
-
-    <FeatureBanner
-      variant="light"
-      eyebrow="David Pinyerd Bio"
-      title="Meet David Pinyerd, Founder and Managing Attorney"
-      name="David Pinyerd"
-      bio="David Pinyerd is the distinguished founder, owner, and managing attorney of our esteemed law firm. With over twelve years of unwavering commitment."
-      href="/about/david-pinyerd"
-      ctaLabel="Read More"
-      image={featureBannerLight}
-    />
-
-    <ContactForm
-      backgroundImage={formBg}
-      heading="Get Pinyerd Law on Your Side"
-      phoneDisplay="(317) 348-1800"
-      phoneHref="tel:3173481800"
-      servingLabel="Serving Clients Across All 50 States."
-      mapLabel="Map & Directions [+]"
-      mapHref="/locations"
-      description="Contact us online or call (317) 348-1800 to start discussing your legal options with disability attorneys.<br /><br />We offer flexible scheduling and can meet with you on weekends or after-hours."
-      formHeading="Reach Out Today to Speak With Our Experienced Attorneys"
-      reasonsLabel="Reason(s) for Inquiry"
-      reasons={[
-        "Social Security Disability Insurance",
-        "Supplemental Security Income",
-        "Veterans Disability",
-        "Camp Lejeune Water Contamination Lawsuit",
-      ]}
-      messageLabel="Tell Us More About Your Case"
-      submitLabel="Send Message"
-      formAction="/api/contact"
-    />
+    <ContactForm backgroundImage={formBg} {...siteContactFormContent} />
 
     <BlogSection eyebrow="Latest News" title="Our Blog" posts={blogPosts} ctaLabel="View All" ctaHref="/blog" />
 
