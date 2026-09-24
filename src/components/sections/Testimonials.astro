@@ -22,30 +22,131 @@ interface Props {
 const { eyebrow, title, description, ctaLabel, ctaHref, reviews } = Astro.props;
 ---
 
-<section class="flex flex-col items-center gap-8 bg-white px-6 py-16 lg:py-[140px]">
-  <div class="content flex flex-col gap-8">
-    <div class="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-between">
-      <div class="flex w-full flex-col items-start gap-5 lg:w-[323px]">
+<section class="testimonials">
+  <div class="content testimonials-inner">
+    <div class="testimonials-row">
+      <div class="testimonials-heading">
         <SectionHeading eyebrow={eyebrow} title={title}>
-          <p class="font-sans text-base tracking-tight text-ink">{description}</p>
+          <p class="testimonials-description">{description}</p>
         </SectionHeading>
         <Button href={ctaHref} variant="solid">{ctaLabel}</Button>
       </div>
 
-      <div class="flex w-full flex-col gap-5 sm:flex-row sm:justify-center lg:w-auto">
+      <div class="testimonials-cards">
         {reviews.map((review) => (
           <TestimonialCard quote={review.quote} name={review.name} avatar={review.avatar} />
         ))}
       </div>
     </div>
 
-    <div class="flex h-[45px] w-[90px] self-end overflow-hidden rounded-md">
-      <button type="button" aria-label="Previous testimonial" class="flex h-full w-1/2 items-center justify-center bg-ink">
-        <img src="/icons/icon-carousel-prev.svg" alt="" class="h-6 w-6 rotate-180" aria-hidden="true" />
+    <div class="testimonials-arrows">
+      <button type="button" aria-label="Previous testimonial" class="testimonials-arrow">
+        <img src="/icons/icon-carousel-prev.svg" alt="" class="testimonials-arrow-icon testimonials-arrow-icon--prev" aria-hidden="true" />
       </button>
-      <button type="button" aria-label="Next testimonial" class="flex h-full w-1/2 items-center justify-center bg-ink">
-        <img src="/icons/icon-carousel-prev.svg" alt="" class="h-6 w-6" aria-hidden="true" />
+      <button type="button" aria-label="Next testimonial" class="testimonials-arrow">
+        <img src="/icons/icon-carousel-prev.svg" alt="" class="testimonials-arrow-icon" aria-hidden="true" />
       </button>
     </div>
   </div>
 </section>
+
+<style>
+  .testimonials {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    background: var(--color-white);
+    padding: 64px var(--gutter);
+  }
+
+  .testimonials-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .testimonials-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .testimonials-heading {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .testimonials-description {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+
+  .testimonials-cards {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .testimonials-arrows {
+    display: flex;
+    height: 45px;
+    width: 90px;
+    align-self: flex-end;
+    overflow: hidden;
+    border-radius: 6px;
+  }
+
+  .testimonials-arrow {
+    display: flex;
+    height: 100%;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: var(--color-ink);
+  }
+
+  .testimonials-arrow-icon {
+    height: 24px;
+    width: 24px;
+  }
+
+  .testimonials-arrow-icon--prev {
+    transform: rotate(180deg);
+  }
+
+  @media (min-width: 640px) {
+    .testimonials-cards {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .testimonials {
+      padding-block: 140px;
+    }
+
+    .testimonials-row {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .testimonials-heading {
+      width: 323px;
+    }
+
+    .testimonials-cards {
+      width: auto;
+    }
+  }
+</style>

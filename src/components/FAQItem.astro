@@ -8,27 +8,13 @@ interface Props {
 const { question, answer, open = false } = Astro.props;
 ---
 
-<div
-  class:list={[
-    "faq-item w-full overflow-hidden rounded-md border border-line bg-white shadow-[0_16px_40px_0_rgba(0,0,0,0.04),0_12px_30px_0_rgba(0,0,0,0.07)]",
-    open && "shadow-[inset_5px_0px_0px_0px_#153860]",
-  ]}
->
-  <button
-    type="button"
-    class="faq-trigger flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
-    aria-expanded={open}
-  >
-    <span class="font-sans text-lg font-medium text-navy-light">{question}</span>
-    <img
-      src="/icons/icon-chevron-down.svg"
-      alt=""
-      class:list={["faq-icon h-8 w-8 shrink-0 transition-transform", open ? "-rotate-90" : "rotate-90"]}
-      aria-hidden="true"
-    />
+<div class:list={["faq-item", open && "is-open"]}>
+  <button type="button" class="faq-trigger" aria-expanded={open}>
+    <span class="faq-question">{question}</span>
+    <img src="/icons/icon-chevron-down.svg" alt="" class="faq-icon" aria-hidden="true" />
   </button>
-  <div class="faq-panel px-6" style={`display:${open ? "block" : "none"}`}>
-    <p class="pb-6 font-sans text-base leading-relaxed text-ink">{answer}</p>
+  <div class="faq-panel" style={`display:${open ? "block" : "none"}`}>
+    <p class="faq-answer">{answer}</p>
   </div>
 </div>
 
@@ -36,15 +22,70 @@ const { question, answer, open = false } = Astro.props;
   document.querySelectorAll<HTMLElement>(".faq-item").forEach((item) => {
     const trigger = item.querySelector<HTMLButtonElement>(".faq-trigger");
     const panel = item.querySelector<HTMLElement>(".faq-panel");
-    const icon = item.querySelector<HTMLImageElement>(".faq-icon");
 
     trigger?.addEventListener("click", () => {
       const isOpen = panel?.style.display === "block";
       panel!.style.display = isOpen ? "none" : "block";
       trigger.setAttribute("aria-expanded", String(!isOpen));
-      icon!.classList.toggle("-rotate-90", !isOpen);
-      icon!.classList.toggle("rotate-90", isOpen);
-      item.classList.toggle("shadow-[inset_5px_0px_0px_0px_#153860]", !isOpen);
+      item.classList.toggle("is-open", !isOpen);
     });
   });
 </script>
+
+<style>
+  .faq-item {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 1px solid var(--color-line);
+    background: var(--color-white);
+    box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.04), 0 12px 30px 0 rgba(0, 0, 0, 0.07);
+  }
+
+  .faq-item.is-open {
+    box-shadow: inset 5px 0 0 0 var(--color-navy-light);
+  }
+
+  .faq-trigger {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border: none;
+    background: transparent;
+    padding: 20px 24px;
+    text-align: left;
+  }
+
+  .faq-question {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-navy-light);
+  }
+
+  .faq-icon {
+    height: 32px;
+    width: 32px;
+    flex-shrink: 0;
+    transform: rotate(90deg);
+    transition: transform 0.15s ease;
+  }
+
+  .faq-item.is-open .faq-icon {
+    transform: rotate(-90deg);
+  }
+
+  .faq-panel {
+    padding-inline: 24px;
+  }
+
+  .faq-answer {
+    padding-bottom: 24px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.625;
+    color: var(--color-ink);
+  }
+</style>

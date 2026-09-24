@@ -18,20 +18,106 @@ interface Props {
 const { eyebrow, title, photo, photoAlt, storyEyebrow, name, bio, ctaLabel, ctaHref } = Astro.props;
 ---
 
-<section class="flex flex-col items-center justify-center bg-surface px-6 py-16 lg:py-[100px]">
-  <div class="content flex flex-col gap-12 lg:gap-[70px]">
+<section class="attorney-bio">
+  <div class="content attorney-bio-inner">
     <SectionHeading eyebrow={eyebrow} title={title} />
 
-    <div class="flex flex-col items-center gap-10 lg:flex-row lg:justify-between">
-      <div class="relative h-[280px] w-[280px] shrink-0 overflow-hidden rounded-full shadow-[-6px_-6px_27.6px_0_rgba(111,145,200,0.15),0_25px_50px_0_rgba(0,0,0,0.15)] sm:h-[360px] sm:w-[360px] lg:h-[436px] lg:w-[436px]">
-        <Image src={photo} alt={photoAlt} class="h-full w-full object-cover" width={436} height={436} fit="cover" />
+    <div class="attorney-bio-row">
+      <div class="attorney-bio-photo">
+        <Image src={photo} alt={photoAlt} width={436} height={436} fit="cover" />
       </div>
 
-      <div class="flex w-full flex-col items-start gap-8 lg:w-[703px]">
+      <div class="attorney-bio-content">
         <SectionHeading eyebrow={storyEyebrow} title={name} />
-        <p class="font-sans text-base leading-relaxed text-ink">{bio}</p>
+        <p class="attorney-bio-text">{bio}</p>
         <Button href={ctaHref} variant="solid">{ctaLabel}</Button>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .attorney-bio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-surface);
+    padding: 64px var(--gutter);
+  }
+
+  .attorney-bio-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .attorney-bio-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .attorney-bio-photo {
+    position: relative;
+    height: 280px;
+    width: 280px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 999px;
+    box-shadow: -6px -6px 27.6px 0 rgba(111, 145, 200, 0.15), 0 25px 50px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  .attorney-bio-photo :global(img) {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .attorney-bio-content {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .attorney-bio-text {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.625;
+    color: var(--color-ink);
+  }
+
+  @media (min-width: 640px) {
+    .attorney-bio-photo {
+      height: 360px;
+      width: 360px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .attorney-bio {
+      padding-block: 100px;
+    }
+
+    .attorney-bio-inner {
+      gap: 70px;
+    }
+
+    .attorney-bio-row {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .attorney-bio-photo {
+      height: 436px;
+      width: 436px;
+    }
+
+    .attorney-bio-content {
+      width: 703px;
+    }
+  }
+</style>

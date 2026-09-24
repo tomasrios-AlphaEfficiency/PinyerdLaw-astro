@@ -8,13 +8,82 @@ interface Props {
 const { icon, label, href = "#" } = Astro.props;
 ---
 
-<a
-  href={href}
-  class="card-surface flex h-[60px] w-full items-center justify-between px-7 py-4 transition-shadow hover:shadow-md lg:w-[530px]"
->
-  <div class="flex items-center gap-6">
-    <img src={icon} alt="" class="h-6 w-6" aria-hidden="true" />
-    <span class="whitespace-nowrap font-serif text-lg tracking-wide text-ink">{label}</span>
+<a href={href} class="practice-area-item">
+  <div class="practice-area-item-content">
+    <img src={icon} alt="" class="practice-area-item-icon" aria-hidden="true" />
+    <span class="practice-area-item-label">{label}</span>
   </div>
-  <img src="/icons/icon-chevron-right.svg" alt="" class="h-3 w-1.5" aria-hidden="true" />
+  <img src="/icons/icon-chevron-right.svg" alt="" class="practice-area-item-arrow" aria-hidden="true" />
 </a>
+
+<style>
+  .practice-area-item {
+    display: flex;
+    min-height: 60px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-radius: 6px;
+    border: 1px solid var(--color-line);
+    background: var(--color-white);
+    box-shadow: 0 6px 15px 0 rgba(0, 0, 0, 0.03);
+    padding: 12px 16px;
+    transition: box-shadow 0.15s ease;
+  }
+
+  .practice-area-item:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  }
+
+  .practice-area-item-content {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .practice-area-item-icon {
+    height: 20px;
+    width: 20px;
+    flex-shrink: 0;
+  }
+
+  .practice-area-item-label {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    color: var(--color-ink);
+  }
+
+  .practice-area-item-arrow {
+    height: 12px;
+    width: 6px;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 640px) {
+    .practice-area-item-content {
+      gap: 24px;
+    }
+
+    .practice-area-item-icon {
+      height: 24px;
+      width: 24px;
+    }
+
+    .practice-area-item-label {
+      font-size: 18px;
+      white-space: nowrap;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .practice-area-item {
+      width: 530px;
+      height: 60px;
+      padding: 16px 28px;
+    }
+  }
+</style>

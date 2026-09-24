@@ -1,0 +1,78 @@
+---
+interface Props {
+  logoAlt: string;
+  heading: string;
+  phoneLabel: string;
+  phoneNumber: string;
+  phoneHref: string;
+  class?: string;
+}
+
+const { logoAlt, heading, phoneLabel, phoneNumber, phoneHref, class: className = "" } = Astro.props;
+---
+
+<div class:list={["consultation-card", className]}>
+  <img src="/icons/logo-outline.svg" alt={logoAlt} class="consultation-card-logo" />
+  <p class="consultation-card-heading">{heading}</p>
+  <div class="consultation-card-phone">
+    <p class="consultation-card-phone-label">{phoneLabel}</p>
+    <a href={phoneHref} class="consultation-card-phone-number">{phoneNumber}</a>
+  </div>
+</div>
+
+<style>
+  .consultation-card {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 32px;
+    border-radius: 12px;
+    background: var(--color-white);
+    box-shadow: -6px -6px 27.6px 0 rgba(111, 145, 200, 0.15), 0 25px 50px 0 rgba(0, 0, 0, 0.15);
+    padding: 32px;
+  }
+
+  .consultation-card-logo {
+    height: 46px;
+    width: auto;
+  }
+
+  .consultation-card-heading {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    line-height: 1.2;
+    color: var(--color-ink);
+  }
+
+  .consultation-card-phone {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .consultation-card-phone-label {
+    font-family: var(--font-sans);
+    font-size: 24px;
+    color: var(--color-ink);
+  }
+
+  .consultation-card-phone-number {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    letter-spacing: 0.96px;
+    color: var(--color-ink);
+  }
+
+  .consultation-card-phone-number:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 1024px) {
+    .consultation-card-heading {
+      font-size: 50px;
+    }
+  }
+</style>

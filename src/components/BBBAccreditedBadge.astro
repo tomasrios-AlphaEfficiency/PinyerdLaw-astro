@@ -6,20 +6,66 @@ interface Props {
 const { class: className = "" } = Astro.props;
 ---
 
-<div class:list={["relative aspect-[133.536/55.195] w-auto", className]} role="img" aria-label="BBB Accredited Business A+ Rating">
-  <div class="absolute inset-[0.86%_20.21%_0.86%_-0.16%]">
-    <img src="/icons/badge-bbb-1.svg" alt="" class="block h-full w-full" aria-hidden="true" />
+<div class:list={["bbb-badge", className]} role="img" aria-label="BBB Accredited Business A+ Rating">
+  <div class="bbb-badge-layer bbb-badge-layer--1">
+    <img src="/icons/badge-bbb-1.svg" alt="" aria-hidden="true" />
   </div>
-  <div class="absolute inset-[23.5%_45.56%_31.96%_22.4%]">
-    <img src="/icons/badge-bbb-2.svg" alt="" class="block h-full w-full" aria-hidden="true" />
+  <div class="bbb-badge-layer bbb-badge-layer--2">
+    <img src="/icons/badge-bbb-2.svg" alt="" aria-hidden="true" />
   </div>
-  <div class="absolute inset-[74.04%_49.33%_21.52%_22.42%]">
-    <img src="/icons/badge-bbb-3.svg" alt="" class="block h-full w-full" aria-hidden="true" />
+  <div class="bbb-badge-layer bbb-badge-layer--3">
+    <img src="/icons/badge-bbb-3.svg" alt="" aria-hidden="true" />
   </div>
-  <div class="absolute inset-[23.34%_79.25%_31.91%_11.61%]">
-    <img src="/icons/badge-bbb-4.svg" alt="" class="block h-full w-full" aria-hidden="true" />
+  <div class="bbb-badge-layer bbb-badge-layer--4">
+    <img src="/icons/badge-bbb-4.svg" alt="" aria-hidden="true" />
   </div>
-  <div class="absolute inset-[0.86%_0.23%_0.86%_59.81%]">
-    <img src="/icons/badge-bbb-5.svg" alt="" class="block h-full w-full" aria-hidden="true" />
+  <div class="bbb-badge-layer bbb-badge-layer--5">
+    <img src="/icons/badge-bbb-5.svg" alt="" aria-hidden="true" />
   </div>
 </div>
+
+<style>
+  .bbb-badge {
+    position: relative;
+    height: 40px;
+    width: auto;
+    aspect-ratio: 133.536 / 55.195;
+    opacity: 0.9;
+  }
+
+  @media (min-width: 640px) {
+    .bbb-badge {
+      height: 48px;
+    }
+  }
+
+  .bbb-badge-layer {
+    position: absolute;
+  }
+
+  .bbb-badge-layer img {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+
+  .bbb-badge-layer--1 {
+    inset: 0.86% 20.21% 0.86% -0.16%;
+  }
+
+  .bbb-badge-layer--2 {
+    inset: 23.5% 45.56% 31.96% 22.4%;
+  }
+
+  .bbb-badge-layer--3 {
+    inset: 74.04% 49.33% 21.52% 22.42%;
+  }
+
+  .bbb-badge-layer--4 {
+    inset: 23.34% 79.25% 31.91% 11.61%;
+  }
+
+  .bbb-badge-layer--5 {
+    inset: 0.86% 0.23% 0.86% 59.81%;
+  }
+</style>

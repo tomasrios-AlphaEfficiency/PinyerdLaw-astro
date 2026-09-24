@@ -1,0 +1,53 @@
+---
+import { Image, type ImageMetadata } from "astro:assets";
+import BBBAccreditedBadge from "./BBBAccreditedBadge.astro";
+
+interface Props {
+  badge: {
+    src: ImageMetadata | string;
+    alt: string;
+    variant?: "image" | "medal";
+  };
+}
+
+const { badge } = Astro.props;
+---
+
+{badge.src === "bbb" ? (
+  <BBBAccreditedBadge class="hero-badge" />
+) : badge.variant === "medal" ? (
+  typeof badge.src === "string" ? (
+    <img src={badge.src} alt={badge.alt} class="hero-badge hero-badge--medal" />
+  ) : (
+    <Image src={badge.src} alt={badge.alt} class="hero-badge hero-badge--medal" width={390} height={450} />
+  )
+) : typeof badge.src === "string" ? (
+  <img src={badge.src} alt={badge.alt} class="hero-badge hero-badge--image" />
+) : (
+  <Image src={badge.src} alt={badge.alt} class="hero-badge hero-badge--image" height={48} />
+)}
+
+<style>
+  .hero-badge {
+    height: 40px;
+    width: auto;
+    opacity: 0.9;
+  }
+
+  .hero-badge--image {
+    object-fit: contain;
+  }
+
+  .hero-badge.hero-badge--medal {
+    height: 150px;
+    width: 130px;
+    object-fit: fill;
+    object-position: bottom;
+  }
+
+  @media (min-width: 640px) {
+    .hero-badge {
+      height: 48px;
+    }
+  }
+</style>

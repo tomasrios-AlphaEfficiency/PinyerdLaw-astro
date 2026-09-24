@@ -15,16 +15,16 @@ interface Props {
 const { image, imageAlt, eyebrow, title, ctaLabel, ctaHref } = Astro.props;
 ---
 
-<section class="flex flex-col items-center bg-white px-6 py-16 lg:py-[140px]">
-  <div class="content flex flex-col items-center justify-between gap-10 lg:flex-row">
-    <div class="h-[360px] w-full overflow-hidden rounded-md bg-[#e4e5eb] sm:h-[500px] lg:h-[775px] lg:w-[620px] lg:shrink-0">
-      <Image src={image} alt={imageAlt} class="h-full w-full object-cover" width={620} height={775} fit="cover" />
+<section class="approach">
+  <div class="content approach-inner">
+    <div class="approach-image">
+      <Image src={image} alt={imageAlt} width={620} height={775} fit="cover" />
     </div>
 
-    <div class="flex w-full flex-col items-start gap-9 lg:w-[497px]">
+    <div class="approach-content">
       <SectionHeading eyebrow={eyebrow} title={title} />
 
-      <div class="flex flex-col gap-4 text-justify font-sans text-base leading-relaxed text-ink">
+      <div class="approach-body">
         <slot />
       </div>
 
@@ -32,3 +32,89 @@ const { image, imageAlt, eyebrow, title, ctaLabel, ctaHref } = Astro.props;
     </div>
   </div>
 </section>
+
+<style>
+  .approach {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--color-white);
+    padding: 64px var(--gutter);
+  }
+
+  .approach-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .approach-image {
+    height: 360px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #e4e5eb;
+  }
+
+  .approach-image :global(img) {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .approach-content {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 36px;
+  }
+
+  .approach-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: justify;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.625;
+    color: var(--color-ink);
+  }
+
+  .approach-body :global(strong),
+  .approach-body :global(.approach-body-strong) {
+    font-weight: 700;
+  }
+
+  .approach-body :global(.approach-body-semibold) {
+    font-weight: 600;
+  }
+
+  @media (min-width: 640px) {
+    .approach-image {
+      height: 500px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .approach {
+      padding-block: 140px;
+    }
+
+    .approach-inner {
+      flex-direction: row;
+    }
+
+    .approach-image {
+      height: 775px;
+      width: 620px;
+      flex-shrink: 0;
+    }
+
+    .approach-content {
+      width: 497px;
+    }
+  }
+</style>

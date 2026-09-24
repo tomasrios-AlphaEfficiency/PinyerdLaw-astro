@@ -24,11 +24,11 @@ interface Props {
 const { eyebrow, title, posts, ctaLabel, ctaHref } = Astro.props;
 ---
 
-<section class="flex flex-col items-start bg-white px-6 py-16 lg:py-[140px]">
-  <div class="content flex flex-col gap-8">
+<section class="blog-section">
+  <div class="content blog-section-inner">
     <SectionHeading eyebrow={eyebrow} title={title} />
 
-    <div class="flex flex-col gap-5 lg:flex-row">
+    <div class="blog-section-list">
       {posts.map((post) => (
         <BlogCard
           image={post.image}
@@ -44,3 +44,35 @@ const { eyebrow, title, posts, ctaLabel, ctaHref } = Astro.props;
     <Button href={ctaHref} variant="solid">{ctaLabel}</Button>
   </div>
 </section>
+
+<style>
+  .blog-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: var(--color-white);
+    padding: 64px var(--gutter);
+  }
+
+  .blog-section-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .blog-section-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  @media (min-width: 1024px) {
+    .blog-section {
+      padding-block: 140px;
+    }
+
+    .blog-section-list {
+      flex-direction: row;
+    }
+  }
+</style>

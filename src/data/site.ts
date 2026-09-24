@@ -43,3 +43,8 @@ export const siteContact = {
   href: "/contact",
   label: "Contact Us",
 };
+
+export const sitePhone = {
+  href: "tel:3173481800",
+  label: "Call Us for a Consultation",
+};

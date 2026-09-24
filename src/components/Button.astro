@@ -7,25 +7,74 @@ interface Props {
 }
 
 const { href = "#", variant = "solid", class: className = "", icon = "none" } = Astro.props;
-
-const variants: Record<string, string> = {
-  solid: "bg-maroon text-white hover:bg-[#84181d]",
-  "outline-dark": "border border-navy text-navy hover:bg-navy hover:text-white",
-  "outline-light": "border border-white/60 text-white hover:bg-white/10",
-  white: "bg-white text-navy hover:bg-white/90",
-};
 ---
 
-<a
-  href={href}
-  class:list={[
-    "inline-flex w-fit items-center justify-center gap-3 rounded-xl px-8 py-4 font-sans text-base font-medium leading-none transition-colors",
-    variants[variant],
-    className,
-  ]}
->
-  {icon === "phone" && (
-    <img src="/icons/icon-phone.svg" alt="" class="h-4 w-4" aria-hidden="true" />
-  )}
+<a href={href} class:list={["btn", `btn--${variant}`, className]}>
+  {icon === "phone" && <img src="/icons/icon-phone.svg" alt="" class="btn-icon" aria-hidden="true" />}
   <slot />
 </a>
+
+<style>
+  .btn {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border-radius: 12px;
+    padding: 16px 32px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  @media (min-width: 1024px) {
+    .btn {
+      width: fit-content;
+    }
+  }
+
+  .btn-icon {
+    height: 16px;
+    width: 16px;
+  }
+
+  .btn--solid {
+    background: var(--color-maroon);
+    color: var(--color-white);
+  }
+
+  .btn--solid:hover {
+    background: var(--color-maroon-dark);
+  }
+
+  .btn--outline-dark {
+    border: 1px solid var(--color-navy);
+    color: var(--color-navy);
+  }
+
+  .btn--outline-dark:hover {
+    background: var(--color-navy);
+    color: var(--color-white);
+  }
+
+  .btn--outline-light {
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: var(--color-white);
+  }
+
+  .btn--outline-light:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .btn--white {
+    background: var(--color-white);
+    color: var(--color-navy);
+  }
+
+  .btn--white:hover {
+    background: rgba(255, 255, 255, 0.9);
+  }
+</style>

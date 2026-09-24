@@ -18,34 +18,169 @@ const { thumbnail, thumbnailAlt, logo, brandLabel, videoTitle, videoSubtitle, pl
   Astro.props;
 ---
 
-<section class="flex flex-col items-center bg-white px-6 py-16 lg:py-[120px]">
-  <div class="content flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-between">
-    <div class="relative h-[280px] w-full overflow-hidden rounded-md bg-navy sm:h-[348px] lg:h-[348px] lg:w-[620px] lg:shrink-0">
-      <Image src={thumbnail} alt={thumbnailAlt} class="absolute inset-0 h-full w-full object-cover" width={620} height={348} fit="cover" />
-      <div class="absolute inset-0 bg-gradient-to-tr from-navy/70 via-transparent to-transparent"></div>
+<section class="video-intro">
+  <div class="content video-intro-inner">
+    <div class="video-intro-thumb">
+      <Image src={thumbnail} alt={thumbnailAlt} width={620} height={348} fit="cover" />
+      <div class="video-intro-thumb-tint"></div>
 
-      <div class="absolute left-8 top-6 flex items-center gap-2">
-        <img src={logo.src} alt="" class="h-7 w-auto opacity-80" aria-hidden="true" />
-        <span class="font-serif text-sm text-white/80">{brandLabel}</span>
+      <div class="video-intro-brand">
+        <img src={logo.src} alt="" class="video-intro-brand-logo" aria-hidden="true" />
+        <span class="video-intro-brand-label">{brandLabel}</span>
       </div>
 
-      <button
-        type="button"
-        aria-label={playLabel}
-        class="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-maroon shadow-lg"
-      >
+      <button type="button" aria-label={playLabel} class="video-intro-play">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="white"><path d="M4 2.5v15l14-7.5z"/></svg>
       </button>
 
-      <div class="absolute bottom-8 left-8 flex flex-col gap-1">
-        <div class="h-px w-10 bg-white"></div>
-        <p class="font-serif text-xl text-white">{videoTitle}</p>
-        <p class="font-serif text-sm text-white">{videoSubtitle}</p>
+      <div class="video-intro-caption">
+        <div class="video-intro-caption-rule"></div>
+        <p class="video-intro-caption-title">{videoTitle}</p>
+        <p class="video-intro-caption-subtitle">{videoSubtitle}</p>
       </div>
     </div>
 
-    <div class="flex w-full flex-col gap-5 lg:w-[497px]">
+    <div class="video-intro-heading">
       <SectionHeading eyebrow={eyebrow} title={title} titleSize="lg" />
     </div>
   </div>
 </section>
+
+<style>
+  .video-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--color-white);
+    padding: 64px var(--gutter);
+  }
+
+  .video-intro-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .video-intro-thumb {
+    position: relative;
+    height: 280px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--color-navy);
+  }
+
+  .video-intro-thumb :global(img) {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .video-intro-thumb-tint {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top right, rgba(22, 30, 64, 0.7), transparent 60%);
+  }
+
+  .video-intro-brand {
+    position: absolute;
+    left: 32px;
+    top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .video-intro-brand-logo {
+    height: 28px;
+    width: auto;
+    opacity: 0.8;
+  }
+
+  .video-intro-brand-label {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .video-intro-play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: flex;
+    height: 64px;
+    width: 64px;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: none;
+    background: var(--color-maroon);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  }
+
+  .video-intro-caption {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .video-intro-caption-rule {
+    height: 1px;
+    width: 40px;
+    background: var(--color-white);
+  }
+
+  .video-intro-caption-title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    color: var(--color-white);
+  }
+
+  .video-intro-caption-subtitle {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    color: var(--color-white);
+  }
+
+  .video-intro-heading {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  @media (min-width: 640px) {
+    .video-intro-thumb {
+      height: 348px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .video-intro {
+      padding-block: 120px;
+    }
+
+    .video-intro-inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .video-intro-thumb {
+      height: 348px;
+      width: 620px;
+      flex-shrink: 0;
+    }
+
+    .video-intro-heading {
+      width: 497px;
+    }
+  }
+</style>

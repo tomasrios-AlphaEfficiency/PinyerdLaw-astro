@@ -17,14 +17,43 @@ interface Props {
 const { eyebrow, title, faqs } = Astro.props;
 ---
 
-<section class="flex flex-col items-center gap-8 bg-surface px-6 py-16 lg:py-[140px]">
-  <div class="content flex flex-col gap-8">
+<section class="faq-section">
+  <div class="content faq-section-inner">
     <SectionHeading eyebrow={eyebrow} title={title} />
 
-    <div class="flex flex-col gap-4">
+    <div class="faq-section-list">
       {faqs.map((faq) => (
         <FAQItem question={faq.question} answer={faq.answer} open={faq.open} />
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  .faq-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    background: var(--color-surface);
+    padding: 64px var(--gutter);
+  }
+
+  .faq-section-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .faq-section-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  @media (min-width: 1024px) {
+    .faq-section {
+      padding-block: 140px;
+    }
+  }
+</style>

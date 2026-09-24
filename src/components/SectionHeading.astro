@@ -9,32 +9,84 @@ interface Props {
 }
 
 const { eyebrow, title, align = "left", light = false, titleSize = "md", class: className = "" } = Astro.props;
-
-const titleSizes: Record<string, string> = {
-  md: "text-[30px]",
-  lg: "text-3xl sm:text-4xl lg:text-[52px]",
-};
 ---
 
 <div
-  class:list={[
-    "flex flex-col gap-5",
-    align === "center" ? "items-center text-center" : "items-start text-left",
-    className,
-  ]}
+  class:list={["section-heading", `section-heading--${align}`, light && "section-heading--light", className]}
 >
-  <p class:list={["eyebrow-text", light && "text-white/80"]}>
-    {eyebrow}
-  </p>
-  <h2
-    class:list={[
-      "font-serif leading-tight",
-      titleSizes[titleSize],
-      light ? "text-white" : "text-ink",
-    ]}
-  >
+  <p class="section-heading-eyebrow">{eyebrow}</p>
+  <h2 class:list={["section-heading-title", `section-heading-title--${titleSize}`]}>
     <slot name="title">{title}</slot>
   </h2>
-  <div class:list={["heading-divider", light && "bg-white"]}></div>
+  <div class="section-heading-divider"></div>
   <slot />
 </div>
+
+<style>
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .section-heading--left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .section-heading--center {
+    align-items: center;
+    text-align: center;
+  }
+
+  .section-heading-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-navy-light);
+  }
+
+  .section-heading--light .section-heading-eyebrow {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .section-heading-title {
+    font-family: var(--font-serif);
+    line-height: 1.2;
+    color: var(--color-ink);
+  }
+
+  .section-heading--light .section-heading-title {
+    color: var(--color-white);
+  }
+
+  .section-heading-title--md {
+    font-size: 30px;
+  }
+
+  .section-heading-title--lg {
+    font-size: 30px;
+  }
+
+  @media (min-width: 640px) {
+    .section-heading-title--lg {
+      font-size: 36px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-heading-title--lg {
+      font-size: 52px;
+    }
+  }
+
+  .section-heading-divider {
+    height: 1px;
+    width: 65px;
+    background: #303030;
+  }
+
+  .section-heading--light .section-heading-divider {
+    background: var(--color-white);
+  }
+</style>

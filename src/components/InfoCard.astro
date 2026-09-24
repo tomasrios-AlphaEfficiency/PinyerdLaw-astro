@@ -1,0 +1,47 @@
+---
+interface Props {
+  title: string;
+  href?: string;
+  class?: string;
+}
+
+const { title, href, class: className = "" } = Astro.props;
+const Tag = href ? "a" : "div";
+---
+
+<Tag href={href} class:list={["info-card", className]}>
+  <slot name="icon" />
+  <div class="info-card-text">
+    <p class="info-card-title">{title}</p>
+    <slot />
+  </div>
+</Tag>
+
+<style>
+  .info-card {
+    display: flex;
+    height: 110px;
+    flex: 1;
+    align-items: center;
+    gap: 16px;
+    overflow: hidden;
+    border-radius: 12px;
+    border-bottom: 6px solid var(--color-navy-light);
+    background: var(--color-white);
+    box-shadow: -6px -6px 27.6px 0 rgba(111, 145, 200, 0.15), 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    padding-inline: 40px;
+  }
+
+  .info-card-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: var(--color-navy);
+  }
+
+  .info-card-title {
+    font-family: var(--font-serif);
+    font-size: 25px;
+    letter-spacing: 0.25px;
+  }
+</style>

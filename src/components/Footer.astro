@@ -50,44 +50,42 @@ const {
 } = Astro.props;
 ---
 
-<footer class="bg-navy px-6 py-16">
-  <div class="content flex flex-col gap-8">
-    <div class="flex flex-col gap-6 lg:flex-row">
-      <div class="relative h-[220px] w-full overflow-hidden rounded-md lg:h-[341px] lg:w-[629px] lg:shrink-0">
-        <Image src={photo} alt={photoAlt} class="h-full w-full object-cover" width={629} height={341} fit="cover" />
+<footer class="footer">
+  <div class="content footer-inner">
+    <div class="footer-top">
+      <div class="footer-photo">
+        <Image src={photo} alt={photoAlt} width={629} height={341} fit="cover" />
       </div>
 
-      <div class="flex w-full flex-col justify-between gap-7">
-        <div class="flex w-full items-center gap-3">
-          <p class="whitespace-nowrap font-sans text-base font-medium uppercase tracking-wide text-white">
-            Our Locations
-          </p>
-          <div class="h-px w-full bg-white/40"></div>
+      <div class="footer-locations">
+        <div class="footer-locations-heading">
+          <p class="footer-locations-title">Our Locations</p>
+          <div class="footer-locations-rule"></div>
         </div>
 
-        <div class="flex flex-col items-end gap-7">
+        <div class="footer-locations-list">
           {locations.map((loc, i) => (
             <>
-              <div class="flex w-full items-start gap-3">
-                <img src="/icons/icon-location-pin.svg" alt="" class="h-12 w-12 shrink-0" aria-hidden="true" />
-                <div class="flex flex-col gap-3 text-white">
-                  <p class="font-sans text-base font-semibold">{loc.title}</p>
-                  <p class="font-sans text-base leading-snug">
-                    {loc.lines.map((line) => <span class="block">{line}</span>)}
+              <div class="footer-location">
+                <img src="/icons/icon-location-pin.svg" alt="" class="footer-location-icon" aria-hidden="true" />
+                <div class="footer-location-text">
+                  <p class="footer-location-title">{loc.title}</p>
+                  <p class="footer-location-lines">
+                    {loc.lines.map((line) => <span class="footer-location-line">{line}</span>)}
                   </p>
                 </div>
               </div>
-              {i < locations.length - 1 && <div class="h-px w-full bg-white/40"></div>}
+              {i < locations.length - 1 && <div class="footer-locations-divider"></div>}
             </>
           ))}
         </div>
       </div>
     </div>
 
-    <div class="flex flex-col gap-8 border-y border-white/50 py-5 lg:flex-row lg:items-stretch">
-      <div class="flex flex-1 flex-col gap-8">
-        <img src={logo.src} alt={logoAlt} class="h-[57px] w-auto" />
-        <p class="font-sans text-base text-white">
+    <div class="footer-middle">
+      <div class="footer-brand">
+        <img src={logo.src} alt={logoAlt} class="footer-logo" />
+        <p class="footer-tagline">
           {tagline.map((line, i) => (
             <>
               {line}
@@ -95,47 +93,40 @@ const {
             </>
           ))}
         </p>
-        <div class="flex gap-2.5">
+        <div class="footer-socials">
           {socials.map((s) => (
-            <a
-              href={s.href}
-              aria-label={s.label}
-              class="flex h-[34px] w-[34px] items-center justify-center rounded border border-white/50 bg-navy"
-            >
-              <img src={s.icon} alt="" class="h-5 w-5" aria-hidden="true" />
+            <a href={s.href} aria-label={s.label} class="footer-social-link">
+              <img src={s.icon} alt="" class="footer-social-icon" aria-hidden="true" />
             </a>
           ))}
         </div>
       </div>
 
-      <div class="hidden w-px bg-white/20 lg:block"></div>
+      <div class="footer-middle-divider"></div>
 
-      <div class="flex flex-col justify-center gap-4 lg:px-12">
+      <div class="footer-links">
         {links.map((link) => (
-          <div class="flex w-full items-center justify-between gap-8 border-b border-white/10 py-1 lg:w-[242px]">
-            <a href={link.href} class="font-sans text-base text-white">{link.label}</a>
-            <img src="/icons/icon-chevron-right-circle.svg" alt="" class="h-8 w-8 rotate-180" aria-hidden="true" />
+          <div class="footer-link-row">
+            <a href={link.href} class="footer-link">{link.label}</a>
+            <img src="/icons/icon-chevron-right-circle.svg" alt="" class="footer-link-icon" aria-hidden="true" />
           </div>
         ))}
       </div>
 
-      <div class="flex flex-1 items-start rounded-xl bg-[rgba(104,160,224,0.07)] p-6">
-        <div class="flex flex-1 flex-col gap-6">
-          <div class="flex flex-col gap-4 text-white">
-            <p class="font-sans text-base font-semibold">{ctaTitle}</p>
-            <p class="font-sans text-base">{ctaDescription}</p>
+      <div class="footer-cta">
+        <div class="footer-cta-inner">
+          <div class="footer-cta-text">
+            <p class="footer-cta-title">{ctaTitle}</p>
+            <p class="footer-cta-description">{ctaDescription}</p>
           </div>
-          <a
-            href={ctaHref}
-            class="flex h-[50px] items-center justify-center rounded-xl bg-white px-8 font-sans text-base font-medium text-ink"
-          >
+          <a href={ctaHref} class="footer-cta-button">
             {ctaLabel}
           </a>
         </div>
       </div>
     </div>
 
-    <p class="text-center font-sans text-xs font-light text-white">
+    <p class="footer-disclaimer">
       {disclaimer.map((paragraph, i) => (
         <>
           {paragraph}
@@ -145,3 +136,284 @@ const {
     </p>
   </div>
 </footer>
+
+<style>
+  .footer {
+    background: var(--color-navy);
+    padding: 64px var(--gutter);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer-photo {
+    position: relative;
+    height: 220px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+  }
+
+  .footer-photo :global(img) {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .footer-locations {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 28px;
+  }
+
+  .footer-locations-heading {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .footer-locations-title {
+    white-space: nowrap;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--color-white);
+  }
+
+  .footer-locations-rule {
+    height: 1px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.4);
+  }
+
+  .footer-locations-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 28px;
+  }
+
+  .footer-location {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .footer-location-icon {
+    height: 48px;
+    width: 48px;
+    flex-shrink: 0;
+  }
+
+  .footer-location-text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: var(--color-white);
+  }
+
+  .footer-location-title {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .footer-location-lines {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.375;
+  }
+
+  .footer-location-line {
+    display: block;
+  }
+
+  .footer-locations-divider {
+    height: 1px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.4);
+  }
+
+  .footer-middle {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding-block: 20px;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .footer-logo {
+    height: 57px;
+    width: auto;
+  }
+
+  .footer-tagline {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    color: var(--color-white);
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 10px;
+  }
+
+  .footer-social-link {
+    display: flex;
+    height: 34px;
+    width: 34px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: var(--color-navy);
+  }
+
+  .footer-social-icon {
+    height: 20px;
+    width: 20px;
+  }
+
+  .footer-middle-divider {
+    display: none;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .footer-link-row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-block: 4px;
+  }
+
+  .footer-link {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    color: var(--color-white);
+  }
+
+  .footer-link-icon {
+    height: 32px;
+    width: 32px;
+  }
+
+  .footer-cta {
+    display: flex;
+    flex: 1;
+    align-items: flex-start;
+    border-radius: 12px;
+    background: rgba(104, 160, 224, 0.07);
+    padding: 24px;
+  }
+
+  .footer-cta-inner {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer-cta-text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: var(--color-white);
+  }
+
+  .footer-cta-title {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .footer-cta-description {
+    font-family: var(--font-sans);
+    font-size: 16px;
+  }
+
+  .footer-cta-button {
+    display: flex;
+    width: fit-content;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--color-white);
+    padding-inline: 32px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  .footer-disclaimer {
+    text-align: center;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--color-white);
+  }
+
+  @media (min-width: 1024px) {
+    .footer-top {
+      flex-direction: row;
+    }
+
+    .footer-photo {
+      height: 341px;
+      width: 629px;
+      flex-shrink: 0;
+    }
+
+    .footer-middle {
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    .footer-middle-divider {
+      display: block;
+    }
+
+    .footer-links {
+      padding-inline: 48px;
+    }
+
+    .footer-link-row {
+      width: 242px;
+    }
+  }
+</style>

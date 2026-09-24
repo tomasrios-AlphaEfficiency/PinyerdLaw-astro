@@ -1,51 +1,106 @@
-@import "tailwindcss";
+/* ---------------------------------------------------------------------- */
+/* Design tokens                                                          */
+/* ---------------------------------------------------------------------- */
 
-@theme {
+:root {
   --font-serif: "Prata", serif;
   --font-sans: "Montserrat", sans-serif;
 
   --color-navy: #161e40;
   --color-navy-light: #153860;
   --color-maroon: #9f2026;
+  --color-maroon-dark: #84181d;
   --color-ink: #060606;
   --color-surface: #f9f9f9;
   --color-line: #ddd;
+  --color-white: #ffffff;
+
+  --content-max-width: 1220px;
+  --gutter: 20px;
 }
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+/* ---------------------------------------------------------------------- */
+/* Reset                                                                  */
+/* ---------------------------------------------------------------------- */
 
-  body {
-    font-family: var(--font-sans);
-    color: var(--color-ink);
-    background: #fff;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-family: var(--font-serif);
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@layer components {
-  /* Centers section content at the design's 1220px content width. */
-  .content {
-    @apply mx-auto w-full max-w-[1220px];
-  }
+html {
+  scroll-behavior: smooth;
+}
 
-  .eyebrow-text {
-    @apply font-sans text-lg font-medium text-navy-light;
-  }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
 
-  .heading-divider {
-    @apply h-px w-[65px] bg-[#303030];
-  }
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+}
 
-  .card-surface {
-    @apply rounded-md border border-line bg-white shadow-[0_6px_15px_0_rgba(0,0,0,0.03)];
-  }
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input,
+textarea,
+button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Shared layout primitives                                               */
+/* ---------------------------------------------------------------------- */
+
+/* Centers section content at the design's 1220px content width. */
+.content {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

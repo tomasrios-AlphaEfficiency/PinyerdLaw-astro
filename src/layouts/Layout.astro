@@ -11,6 +11,7 @@ import {
   siteFooterLinks,
   siteFooterDisclaimer,
   siteContact,
+  sitePhone,
 } from "../data/site";
 
 interface Props {
@@ -47,6 +48,8 @@ const {
       links={siteNavLinks}
       contactLabel={siteContact.label}
       contactHref={siteContact.href}
+      phoneLabel={sitePhone.label}
+      phoneHref={sitePhone.href}
     />
 
     <slot />

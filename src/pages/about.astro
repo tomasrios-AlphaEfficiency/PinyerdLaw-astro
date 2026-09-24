@@ -1,0 +1,216 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import AttorneyCard from "../components/AttorneyCard.astro";
+import ConsultationCard from "../components/ConsultationCard.astro";
+import InfoCard from "../components/InfoCard.astro";
+import EnvelopeIcon from "../components/EnvelopeIcon.astro";
+
+import aboutHeroBg from "../assets/images/about-hero-bg.png";
+import davidPinyerd from "../assets/images/attorney-david-pinyerd.png";
+import evanWheeler from "../assets/images/attorney-evan-wheeler.png";
+import rjJones from "../assets/images/attorney-rj-jones.png";
+import robMorris from "../assets/images/attorney-rob-morris.png";
+import williamOhara from "../assets/images/attorney-william-ohara.png";
+import jamesBarker from "../assets/images/attorney-james-barker.png";
+import extonCordingley from "../assets/images/attorney-exton-cordingley.png";
+
+const attorneysRowOne = [
+  {
+    photo: davidPinyerd,
+    name: "David Pinyerd",
+    bio: "David Pinyerd is the firm's founder and managing attorney, with over 12 years of experience representing thousands of clients in Social Security Disability and Veterans Disability cases.",
+  },
+  {
+    photo: evanWheeler,
+    name: "Evan Wheeler",
+    bio: "Evan Wheeler is an experienced attorney dedicated to providing client-focused representation to individuals seeking disability benefits in Indiana and nationwide.",
+  },
+  {
+    photo: rjJones,
+    name: "RJ Jones",
+    bio: "RJ is a U.S. Army Reserve and Navy veteran with a background in operating-room technology, military service, human services, and psychology.",
+  },
+];
+
+const attorneysRowTwo = [
+  {
+    photo: robMorris,
+    name: "Rob Morris",
+    bio: "Robert A. Morris is an attorney with over 20 years of diverse legal experience and extensive insight into Social Security Disability claims gained through his service within the Social Security Administration.",
+  },
+  {
+    photo: williamOhara,
+    name: "William O'Hara",
+    bio: "William O'Hara is an accomplished attorney and decorated Vietnam Navy veteran dedicated to advocating for fellow veterans seeking disability benefits.",
+  },
+  {
+    photo: jamesBarker,
+    name: "James Barker",
+    bio: "James Barker is an experienced attorney whose extensive work at the Social Security Administration gives him valuable insight into disability claims and appeals.",
+  },
+];
+
+const contactCards = [
+  { title: "Call Us", href: "tel:3173481800" },
+  { title: "Send Us a Message", href: "mailto:contact@pinyerdlaw.com" },
+  { title: "National HQ" },
+];
+---
+
+<Layout title="About Us | Pinyerd Disability Law, LLC" description="Meet the attorneys of Pinyerd Disability Law, LLC — dedicated advocates for Social Security Disability and VA Disability clients nationwide.">
+  <main>
+    <PageHero title="About Us" backgroundImage={aboutHeroBg} backgroundAlt="Indianapolis skyline at dusk" />
+
+    <section class="attorneys-section">
+      <div class="content attorneys-section-inner">
+        <div class="attorneys-grid">
+          {attorneysRowOne.map((attorney) => (
+            <AttorneyCard photo={attorney.photo} name={attorney.name} bio={attorney.bio} />
+          ))}
+        </div>
+
+        <div class="attorneys-grid">
+          {attorneysRowTwo.map((attorney) => (
+            <AttorneyCard photo={attorney.photo} name={attorney.name} bio={attorney.bio} />
+          ))}
+        </div>
+
+        <div class="attorneys-closing-row">
+          <AttorneyCard
+            photo={extonCordingley}
+            name="Exton R. Cordingley"
+            bio="Exton R. Cordingley was a distinguished attorney and former U.S. Army Judge Advocate who dedicated his career to serving veterans and individuals seeking Social Security disability benefits."
+            tag="In Memoriam"
+          />
+          <ConsultationCard
+            logoAlt="Pinyerd Disability Law"
+            heading="Get a Consultation Right Now"
+            phoneLabel="CALL US"
+            phoneNumber="(317) 348-1800"
+            phoneHref="tel:3173481800"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-strip">
+      <div class="content contact-strip-inner">
+        <InfoCard title={contactCards[0].title} href={contactCards[0].href}>
+          <img src="/icons/icon-phone-outline.svg" alt="" class="contact-strip-icon contact-strip-icon--phone" slot="icon" aria-hidden="true" />
+          <p class="contact-strip-text">(317) 348-1800</p>
+        </InfoCard>
+
+        <InfoCard title={contactCards[1].title} href={contactCards[1].href}>
+          <EnvelopeIcon slot="icon" class="contact-strip-envelope" />
+          <p class="contact-strip-text">contact@pinyerdlaw.com</p>
+        </InfoCard>
+
+        <InfoCard title={contactCards[2].title}>
+          <img src="/icons/icon-location-outline.svg" alt="" class="contact-strip-icon contact-strip-icon--location" slot="icon" aria-hidden="true" />
+          <p class="contact-strip-text">
+            9201 N. Meridian Street, Suite 210,
+            <span class="contact-strip-text-secondary">Indianapolis, IN 46260</span>
+          </p>
+        </InfoCard>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .attorneys-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--color-white);
+    padding: 64px var(--gutter);
+  }
+
+  .attorneys-section-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .attorneys-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .attorneys-closing-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .contact-strip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 64px var(--gutter);
+  }
+
+  .contact-strip-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .contact-strip-icon--phone {
+    height: 60px;
+    width: 32px;
+  }
+
+  .contact-strip-icon--location {
+    height: 63px;
+    width: 26px;
+  }
+
+  .contact-strip-envelope {
+    margin-bottom: 28px;
+  }
+
+  .contact-strip-text {
+    font-family: var(--font-sans);
+    font-size: 16px;
+  }
+
+  .contact-strip-text-secondary {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 300;
+  }
+
+  @media (min-width: 640px) {
+    .attorneys-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact-strip-inner {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .attorneys-section {
+      padding-block: 100px;
+    }
+
+    .attorneys-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .attorneys-closing-row {
+      grid-template-columns: 393fr 795fr;
+    }
+
+    .contact-strip {
+      padding-block: 88px;
+    }
+  }
+</style>

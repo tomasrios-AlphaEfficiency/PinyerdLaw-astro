@@ -13,25 +13,113 @@ interface Props {
 const { image, date, category, title, excerpt, href } = Astro.props;
 ---
 
-<article class="flex flex-1 flex-col overflow-hidden rounded-xl border border-line bg-white shadow-[-6px_-6px_27.6px_0_rgba(111,145,200,0.15),0_25px_50px_-12px_rgba(0,0,0,0.15)]">
-  <div class="relative h-[220px] w-full">
-    <Image src={image} alt={title} class="h-full w-full object-cover" width={393} height={220} fit="cover" />
+<article class="blog-card">
+  <div class="blog-card-image">
+    <Image src={image} alt={title} width={393} height={220} fit="cover" />
   </div>
 
-  <div class="flex flex-col items-start gap-8 p-8">
-    <div class="flex items-start gap-3">
-      <span class="border-r border-[#4e5156] pr-3 font-sans text-base font-medium leading-none text-[#555]">
-        {date}
-      </span>
-      <span class="font-sans text-base font-medium leading-none text-navy-light">{category}</span>
+  <div class="blog-card-body">
+    <div class="blog-card-meta">
+      <span class="blog-card-date">{date}</span>
+      <span class="blog-card-category">{category}</span>
     </div>
 
-    <h3 class="font-serif text-[28px] leading-relaxed text-navy">{title}</h3>
-    <p class="font-sans text-base leading-relaxed text-ink">{excerpt}</p>
+    <h3 class="blog-card-title">{title}</h3>
+    <p class="blog-card-excerpt">{excerpt}</p>
 
-    <a href={href} class="flex items-center gap-3">
-      <span class="font-sans text-base font-semibold text-navy">READ MORE</span>
-      <img src="/icons/icon-arrow-right-small.svg" alt="" class="h-4 w-2 rotate-180" aria-hidden="true" />
+    <a href={href} class="blog-card-link">
+      <span class="blog-card-link-label">READ MORE</span>
+      <img src="/icons/icon-arrow-right-small.svg" alt="" class="blog-card-link-icon" aria-hidden="true" />
     </a>
   </div>
 </article>
+
+<style>
+  .blog-card {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid var(--color-line);
+    background: var(--color-white);
+    box-shadow: -6px -6px 27.6px 0 rgba(111, 145, 200, 0.15), 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  }
+
+  .blog-card-image {
+    position: relative;
+    height: 220px;
+    width: 100%;
+  }
+
+  .blog-card-image :global(img) {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .blog-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    padding: 32px;
+  }
+
+  .blog-card-meta {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .blog-card-date {
+    border-right: 1px solid #4e5156;
+    padding-right: 12px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+    color: #555;
+  }
+
+  .blog-card-category {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--color-navy-light);
+  }
+
+  .blog-card-title {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    line-height: 1.625;
+    color: var(--color-navy);
+  }
+
+  .blog-card-excerpt {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.625;
+    color: var(--color-ink);
+  }
+
+  .blog-card-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .blog-card-link-label {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-navy);
+  }
+
+  .blog-card-link-icon {
+    height: 16px;
+    width: 8px;
+    transform: rotate(180deg);
+  }
+</style>

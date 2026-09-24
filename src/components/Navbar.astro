@@ -10,53 +10,54 @@ interface Props {
   links: NavLink[];
   contactLabel: string;
   contactHref: string;
+  phoneLabel: string;
+  phoneHref: string;
   searchLabel?: string;
 }
 
-const { logoSrc, logoAlt, links, contactLabel, contactHref, searchLabel = "Search" } = Astro.props;
+const { logoSrc, logoAlt, links, contactLabel, contactHref, phoneLabel, phoneHref, searchLabel = "Search" } =
+  Astro.props;
 ---
 
-<header class="sticky top-0 z-50 bg-white px-6 py-2.5">
-  <div class="content flex items-center justify-between gap-8">
-    <a href="/" class="shrink-0">
-      <img src={logoSrc} alt={logoAlt} class="h-[46px] w-auto" />
+<header class="navbar">
+  <a href={phoneHref} class="navbar-call-strip">
+    <img src="/icons/icon-phone.svg" alt="" class="navbar-call-strip-icon" aria-hidden="true" />
+    <span>{phoneLabel}</span>
+  </a>
+
+  <div class="content navbar-inner">
+    <a href="/" class="navbar-logo-link">
+      <img src={logoSrc} alt={logoAlt} class="navbar-logo" />
     </a>
 
-    <nav class="hidden items-center gap-8 lg:flex" aria-label="Primary">
+    <nav class="navbar-nav" aria-label="Primary">
       {links.map((link) => (
-        <a href={link.href} class="whitespace-nowrap font-sans text-sm text-navy hover:text-maroon">
+        <a href={link.href} class="navbar-link">
           {link.label}
         </a>
       ))}
 
-      <div class="flex items-center gap-3">
-        <button
-          type="button"
-          aria-label={searchLabel}
-          class="flex h-10 w-10 items-center justify-center rounded-xl border border-navy"
-        >
-          <img src="/icons/icon-search.svg" alt="" class="h-4 w-4" aria-hidden="true" />
+      <div class="navbar-actions">
+        <button type="button" aria-label={searchLabel} class="navbar-search-button">
+          <img src="/icons/icon-search.svg" alt="" class="navbar-search-icon" aria-hidden="true" />
         </button>
-        <a
-          href={contactHref}
-          class="rounded-xl border border-navy px-4 py-3.5 font-sans text-sm text-navy hover:bg-navy hover:text-white"
-        >
+        <a href={contactHref} class="navbar-contact-link">
           {contactLabel}
         </a>
       </div>
     </nav>
 
-    <button type="button" class="lg:hidden" aria-label="Open menu" id="menu-toggle">
+    <button type="button" class="navbar-menu-toggle" aria-label="Open menu" id="menu-toggle">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" />
       </svg>
     </button>
 
-    <nav id="mobile-menu" class="absolute left-0 top-full hidden w-full flex-col gap-4 border-t border-line bg-white p-6 lg:hidden" aria-label="Mobile">
+    <nav id="mobile-menu" class="navbar-mobile-menu" aria-label="Mobile">
       {links.map((link) => (
-        <a href={link.href} class="font-sans text-sm text-navy">{link.label}</a>
+        <a href={link.href} class="navbar-mobile-link">{link.label}</a>
       ))}
-      <a href={contactHref} class="rounded-xl border border-navy px-4 py-3 text-center font-sans text-sm text-navy">
+      <a href={contactHref} class="navbar-mobile-contact-link">
         {contactLabel}
       </a>
     </nav>
@@ -67,7 +68,168 @@ const { logoSrc, logoAlt, links, contactLabel, contactHref, searchLabel = "Searc
   const toggle = document.getElementById("menu-toggle");
   const menu = document.getElementById("mobile-menu");
   toggle?.addEventListener("click", () => {
-    menu?.classList.toggle("hidden");
-    menu?.classList.toggle("flex");
+    menu?.classList.toggle("is-open");
   });
 </script>
+
+<style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--color-white);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .navbar-call-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: var(--color-maroon);
+    padding: 4px 32px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .navbar-call-strip-icon {
+    height: 15px;
+    width: 16px;
+    filter: brightness(0) invert(1);
+  }
+
+  .navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 24px var(--gutter);
+  }
+
+  .navbar-logo-link {
+    flex-shrink: 0;
+  }
+
+  .navbar-logo {
+    height: 36px;
+    width: auto;
+  }
+
+  .navbar-nav {
+    display: none;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .navbar-link {
+    white-space: nowrap;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--color-navy);
+  }
+
+  .navbar-link:hover {
+    color: var(--color-maroon);
+  }
+
+  .navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .navbar-search-button {
+    display: flex;
+    height: 40px;
+    width: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    border: 1px solid var(--color-navy);
+    background: transparent;
+  }
+
+  .navbar-search-icon {
+    height: 16px;
+    width: 16px;
+  }
+
+  .navbar-contact-link {
+    border-radius: 12px;
+    border: 1px solid var(--color-navy);
+    padding: 14px 16px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--color-navy);
+  }
+
+  .navbar-contact-link:hover {
+    background: var(--color-navy);
+    color: var(--color-white);
+  }
+
+  .navbar-menu-toggle {
+    background: none;
+    border: none;
+    color: var(--color-navy);
+    padding: 0;
+  }
+
+  .navbar-mobile-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    flex-direction: column;
+    gap: 16px;
+    border-top: 1px solid var(--color-line);
+    background: var(--color-white);
+    padding: 24px;
+  }
+
+  .navbar-mobile-menu.is-open {
+    display: flex;
+  }
+
+  .navbar-mobile-link {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--color-navy);
+  }
+
+  .navbar-mobile-contact-link {
+    border-radius: 12px;
+    border: 1px solid var(--color-navy);
+    padding: 12px 16px;
+    text-align: center;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--color-navy);
+  }
+
+  @media (min-width: 1024px) {
+    .navbar-call-strip {
+      display: none;
+    }
+
+    .navbar-inner {
+      padding-block: 10px;
+    }
+
+    .navbar-logo {
+      height: 46px;
+    }
+
+    .navbar-nav {
+      display: flex;
+    }
+
+    .navbar-menu-toggle,
+    .navbar-mobile-menu {
+      display: none;
+    }
+  }
+</style>

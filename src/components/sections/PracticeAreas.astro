@@ -18,16 +18,54 @@ interface Props {
 const { eyebrow, title, description, areas } = Astro.props;
 ---
 
-<section class="flex flex-col items-center justify-center bg-surface px-6 py-16">
-  <div class="content flex flex-col gap-12 lg:gap-[70px]">
+<section class="practice-areas">
+  <div class="content practice-areas-inner">
     <SectionHeading eyebrow={eyebrow} title={title}>
-      <p class="font-sans text-base leading-loose tracking-wide text-ink">{description}</p>
+      <p class="practice-areas-description">{description}</p>
     </SectionHeading>
 
-    <div class="flex flex-wrap justify-between gap-y-5">
+    <div class="practice-areas-list">
       {areas.map((area) => (
         <PracticeAreaItem icon={area.icon} label={area.label} href={area.href} />
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  .practice-areas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-surface);
+    padding: 64px var(--gutter);
+  }
+
+  .practice-areas-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .practice-areas-description {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+    color: var(--color-ink);
+  }
+
+  .practice-areas-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 20px;
+  }
+
+  @media (min-width: 1024px) {
+    .practice-areas-inner {
+      gap: 70px;
+    }
+  }
+</style>
