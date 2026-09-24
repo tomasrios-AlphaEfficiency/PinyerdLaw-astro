@@ -7,13 +7,24 @@ import InfoCard from "../components/InfoCard.astro";
 import EnvelopeIcon from "../components/EnvelopeIcon.astro";
 
 import aboutHeroBg from "../assets/images/about-hero-bg.png";
-import davidPinyerd from "../assets/images/attorney-david-pinyerd.png";
-import evanWheeler from "../assets/images/attorney-evan-wheeler.png";
-import rjJones from "../assets/images/attorney-rj-jones.png";
-import robMorris from "../assets/images/attorney-rob-morris.png";
-import williamOhara from "../assets/images/attorney-william-ohara.png";
-import jamesBarker from "../assets/images/attorney-james-barker.png";
-import extonCordingley from "../assets/images/attorney-exton-cordingley.png";
+import davidPinyerd from "../assets/images/attorney-david-pinyerd.jpg";
+import robMorris from "../assets/images/attorney-rob-morris.jpg";
+import rjJones from "../assets/images/attorney-rj-jones.jpg";
+import jamesBarker from "../assets/images/attorney-james-barker.jpg";
+import evanWheeler from "../assets/images/attorney-evan-wheeler.jpg";
+import tanika from "../assets/images/attorney-tanika.jpg";
+import georgette from "../assets/images/attorney-georgette.png";
+import hannah from "../assets/images/attorney-hannah.png";
+import lexie from "../assets/images/attorney-lexie.jpg";
+import beth from "../assets/images/attorney-beth.jpg";
+import mary from "../assets/images/attorney-mary.png";
+import oriana from "../assets/images/attorney-oriana.jpg";
+import nina from "../assets/images/attorney-nina.jpg";
+import sarah from "../assets/images/attorney-sarah.jpg";
+import kim from "../assets/images/attorney-kim.jpg";
+import skye from "../assets/images/attorney-skye.jpg";
+
+const BIO_PLACEHOLDER = "Bio coming soon.";
 
 const attorneysRowOne = [
   {
@@ -22,9 +33,9 @@ const attorneysRowOne = [
     bio: "David Pinyerd is the firm's founder and managing attorney, with over 12 years of experience representing thousands of clients in Social Security Disability and Veterans Disability cases.",
   },
   {
-    photo: evanWheeler,
-    name: "Evan Wheeler",
-    bio: "Evan Wheeler is an experienced attorney dedicated to providing client-focused representation to individuals seeking disability benefits in Indiana and nationwide.",
+    photo: robMorris,
+    name: "Rob Morris",
+    bio: "Robert A. Morris is an attorney with over 20 years of diverse legal experience and extensive insight into Social Security Disability claims gained through his service within the Social Security Administration.",
   },
   {
     photo: rjJones,
@@ -35,20 +46,34 @@ const attorneysRowOne = [
 
 const attorneysRowTwo = [
   {
-    photo: robMorris,
-    name: "Rob Morris",
-    bio: "Robert A. Morris is an attorney with over 20 years of diverse legal experience and extensive insight into Social Security Disability claims gained through his service within the Social Security Administration.",
-  },
-  {
-    photo: williamOhara,
-    name: "William O'Hara",
-    bio: "William O'Hara is an accomplished attorney and decorated Vietnam Navy veteran dedicated to advocating for fellow veterans seeking disability benefits.",
-  },
-  {
     photo: jamesBarker,
     name: "James Barker",
     bio: "James Barker is an experienced attorney whose extensive work at the Social Security Administration gives him valuable insight into disability claims and appeals.",
   },
+  {
+    photo: evanWheeler,
+    name: "Evan Wheeler",
+    bio: "Evan Wheeler is an experienced attorney dedicated to providing client-focused representation to individuals seeking disability benefits in Indiana and nationwide.",
+  },
+  { photo: tanika, name: "Tanika", bio: BIO_PLACEHOLDER },
+];
+
+const attorneysRowThree = [
+  { photo: georgette, name: "Georgette", bio: BIO_PLACEHOLDER },
+  { photo: hannah, name: "Hannah", bio: BIO_PLACEHOLDER },
+  { photo: lexie, name: "Lexie", bio: BIO_PLACEHOLDER },
+];
+
+const attorneysRowFour = [
+  { photo: beth, name: "Beth", bio: BIO_PLACEHOLDER },
+  { photo: mary, name: "Mary", bio: BIO_PLACEHOLDER },
+  { photo: oriana, name: "Oriana", bio: BIO_PLACEHOLDER },
+];
+
+const attorneysRowFive = [
+  { photo: nina, name: "Nina", bio: BIO_PLACEHOLDER },
+  { photo: sarah, name: "Sarah", bio: BIO_PLACEHOLDER },
+  { photo: kim, name: "Kim", bio: BIO_PLACEHOLDER },
 ];
 
 const contactCards = [
@@ -76,13 +101,26 @@ const contactCards = [
           ))}
         </div>
 
+        <div class="attorneys-grid">
+          {attorneysRowThree.map((attorney) => (
+            <AttorneyCard photo={attorney.photo} name={attorney.name} bio={attorney.bio} />
+          ))}
+        </div>
+
+        <div class="attorneys-grid">
+          {attorneysRowFour.map((attorney) => (
+            <AttorneyCard photo={attorney.photo} name={attorney.name} bio={attorney.bio} />
+          ))}
+        </div>
+
+        <div class="attorneys-grid">
+          {attorneysRowFive.map((attorney) => (
+            <AttorneyCard photo={attorney.photo} name={attorney.name} bio={attorney.bio} />
+          ))}
+        </div>
+
         <div class="attorneys-closing-row">
-          <AttorneyCard
-            photo={extonCordingley}
-            name="Exton R. Cordingley"
-            bio="Exton R. Cordingley was a distinguished attorney and former U.S. Army Judge Advocate who dedicated his career to serving veterans and individuals seeking Social Security disability benefits."
-            tag="In Memoriam"
-          />
+          <AttorneyCard photo={skye} name="Skye" bio={BIO_PLACEHOLDER} />
           <ConsultationCard
             logoAlt="Pinyerd Disability Law"
             heading="Get a Consultation Right Now"

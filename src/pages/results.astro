@@ -1,0 +1,37 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import ResultsSection from "../components/sections/ResultsSection.astro";
+import Testimonials from "../components/sections/Testimonials.astro";
+import ContactForm from "../components/sections/ContactForm.astro";
+import { siteResultGroups, siteTestimonialReviews, siteContactFormContent } from "../data/site";
+
+import practiceAreasHeroBg from "../assets/images/practice-areas-hero-bg.png";
+import formBg from "../assets/images/form-bg.png";
+---
+
+<Layout title="Results | Pinyerd Disability Law, LLC">
+  <PageHero
+    title="Results"
+    backgroundImage={practiceAreasHeroBg}
+    backgroundAlt="Indianapolis skyline at dusk"
+  />
+
+  <ResultsSection
+    eyebrow="Our Results Change Lives"
+    title="We've Won Millions for Our Clients"
+    description="We invite you to browse some of our recent case results to learn more about our past successes and how we have helped people in situations similar to yours."
+    groups={siteResultGroups}
+  />
+
+  <Testimonials
+    eyebrow="What They Say"
+    title="Words From Our Clients"
+    description="Testimonials from our clients from around the web."
+    ctaLabel="See All Reviews"
+    ctaHref="/testimonials"
+    reviews={siteTestimonialReviews}
+  />
+
+  <ContactForm backgroundImage={formBg} {...siteContactFormContent} />
+</Layout>
